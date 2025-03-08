@@ -272,79 +272,44 @@ Si tiene éxito, le dará un mensaje como: `SUCCESS: specified value was saved`.
 > ffmpeg -version
 ```
 
-</details>
 
----
+**Ahora despliega en cualquier hosting de tu elección**
 
-### **`☁️ SKY-ULTRA-PLUS`**
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=blue&lines=𝗗𝗘𝗣𝗟𝗢𝗬+⤵️+𝗢𝗡+🛰️)](https://git.io/typing-svg)
 
-<a
-href="https://dash.skyultraplus.com/home"><img src="https://qu.ax/zFzXF.png" height="125px"></a>
+• Si no tienes una cuenta en Heroku, crea una.
+<br>
+<a href='https://signup.heroku.com/' target="_blank"><img alt='Heroku' src='https://img.shields.io/badge/-Crear-purple?style=for-the-badge&logo=heroku&logoColor=white'/></a>
 
-<details>
- <summary><b> 🌩️ Servidor Sky-Ultra-Plus</b></summary>
+**• 1.1 Ahora despliega.**
+<br>
+[![Desplegar](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FJoseXrl15k%2FNino-Nakano) 
+<a><img src='https://i.imgur.com/LyHic3i.gif'/>
 
-* Dashboard  [`Dash`](https://dash.skyultraplus.com)
-* Panel [`Panel`](https://panel.skyultraplus.com)
-* Canal de WhatsApp [`Canal Sky`](https://whatsapp.com/channel/0029VakUvreFHWpyWUr4Jr0g)
-* Comunidad  [`Aquí`](https://chat.whatsapp.com/JPwcXvPEUwlEOyjI3BpYys)
-* Contacto(s) [`Gata Dios`](https://wa.me/message/B3KTM5XN2JMRD1) / [`Russell`](https://api.whatsapp.com/send/?phone=15167096032&text&type=phone_number&app_absent=0) / [`elrebelde21`](https://facebook.com/elrebelde21)
-* Discord [`SkyUltraPlus`](https://discord.gg/Ph4eWsZ8)
+**• 2 𝗨𝗡𝗗𝗘𝗥 𝗘𝗟 𝗗𝗜𝗦𝗖𝗢𝗥𝗗 / PANEL**
+<br>
+> Haz clic abajo para descargar el archivo del bot:
+<p align="left">
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DESCARGAR%20ARCHIVOS-verde" alt="Archivos Rainhost" width="150"></a>
+<br>
+<a><img src='https://i.imgur.com/LyHic3i.gif'/>
 
-</details>
+> Haz clic abajo para desplegar en Katabump:
+<p align="left">
+  <a href="https://dashboard.katabump.com/auth/login#203630">
+    <img src="https://img.shields.io/badge/Desplegar%20en%20Katabump-Hosting-6962a6?style=for-the-badge&logo=katabump&logoColor=red"/>
+  </a>
+<br>
+<a><img src='https://i.imgur.com/LyHic3i.gif'/>
 
----
+> Haz clic abajo para desplegar en Bot-Hosting:
+<p align="left">
+  <a href="https://bot-hosting.net/?aff=1231885228566646795">
+    <img src="https://img.shields.io/badge/Desplegar%20en%20Bot-hosting-9772a6?style=for-the-badge&logo=bothosting&logoColor=white"/>
+  </a>
+</p>
 
-###  **`☄️ AKIRAX-HOSTING`**
-<a href="https://home.akirax.net"><img src="https://qu.ax/AVgaL.jpg" height="145px"></a>
-
-<details>
- <summary><b>💠 Servidor Akirax-Hosting</b></summary>
-
-* Dashboard: [`Dash`](https://home.akirax.net)
-* Panel: [`Panel`](https://console.akirax.net)
-* Canal de WhatsApp: [`Canal Akirax`](https://whatsapp.com/channel/0029Vb3Ocrs7IUYNQktqeE11)
-* Comunidad: [`Aquí`](https://chat.whatsapp.com/HekxzfoLBxN1TCwTmrlGcy)
-* Contacto(s): [`Matias`](https://Wa.me/+5491164123932) / [`Tesis`](https://wa.me/522431268546)
-
-</details>
-
----
-
-### **`🌌 HOSTING-PY`**
-
-<a
-href="https://dahs.hostingpy.shop/home"><img src="https://files.catbox.moe/lr92z2.jpg" height="125px"></a>
-
-<details>
- <summary><b> 🌠 Servidor HostingPy</b></summary>
-
-* Dashboard  [`Dash`](https://dahs.hostingpy.shop)
-* Panel [`Panel`](https://panel.hostingpy.shop)
-* Canal de WhatsApp [`Canal Py`](https://whatsapp.com/channel/0029Vak4e1R4NVifmh8Tvi3q)
-* Comunidad  [`Aquí`](https://chat.whatsapp.com/HT9YFbWTuqO0DQrq6Xxhvx)
-* Contacto(s) [`Soporte`](https://wa.me/595976126756)
-
-</details>
-
----
-
-###  **`©️ BRONXYS-HOSTING`**
-<a href="https://bronxyshost.com"><img src="https://tinyurl.com/23qv2kvr" height="145px"></a>
-
-<details>
- <summary><b>♣️ Servidor Bronxy-Hosting</b></summary>
-
-* Dashboard: [`Dash`](https://bronxyshost.com)
-* Panel: [`Panel`](https://bronxyshost.com)
-* Canal de WhatsApp: [`Canal Bronxy`](https://whatsapp.com/channel/0029Va9l48kHbFV6SQFKz93B)
-* Grupo Oficial: [`Aquí`](https://chat.whatsapp.com/GVQsAe6CAjoJLuotkpnAqq)
-* Grupo Soporte: [`Soporte`](https://wa.me/message/OMZQOH4YZ765K1) 
-
-</details>
-
----
-
+<a><img src='https://i.imgur.com/LyHic3i.gif'/>
 
 </details>
 
