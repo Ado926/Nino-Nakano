@@ -22,32 +22,29 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
   
 </p> 
 
- <p align="center">
-<a href="https://github.com/JoseXrl15k/followers"><img title="Followers" src="https://img.shields.io/github/followers/JoseXrl15k?color=purple&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/JoseXrl15k/Nino-Nakano?color=blue&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/network/members"><img title="Forks" src="https://img.shields.io/github/forks/JoseXrl15k/Nino-Nakano?color=blue&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/JoseXrl15k/Nino-Nakano?label=Watchers&color=blue&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/"><img title="Size" src="https://img.shields.io/github/repo-size/JoseXrl15k/Nino-Nakano?style=flat-square&color=green"></a>
-<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJoseXrl15k%2FNino-Nakano&count_bg=%2379C83D&title_bg=%23555555&icon=probot.svg&icon_color=%2300FF6D&title=hits&edge_flat=false"/></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/graphs/commit-activity"><img height="20" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"></a>&nbsp;&nbsp;</a>
-<p align="center"><img src="https://profile-counter.glitch.me/{Nino-Nakano}/count.svg" alt="JoseXrl15k :: Visitor's Count" old_src="https://profile-counter.glitch.me/{JoseXrl15k}/count.svg" /></p>
 <p align="center">
-<a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="PUBLIC-BOT" src="https://img.shields.io/static/v1?label=Language&message=English&style=flat-square&color=darkpink"></a> &nbsp;
-  <img src="https://komarev.com/ghpvc/?username=Nino-Nakano&label=VIEWS&style=flat-square&color=blue" />
+<a href="https://github.com/JoseXrl15k/followers"><img title="Seguidores" src="https://img.shields.io/github/followers/JoseXrl15k?color=purple&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/stargazers/"><img title="Estrellas" src="https://img.shields.io/github/stars/JoseXrl15k/Nino-Nakano?color=blue&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/network/members"><img title="Forks" src="https://img.shields.io/github/forks/JoseXrl15k/Nino-Nakano?color=blue&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/watchers"><img title="Observadores" src="https://img.shields.io/github/watchers/JoseXrl15k/Nino-Nakano?label=Observadores&color=blue&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/"><img title="Tamaño" src="https://img.shields.io/github/repo-size/JoseXrl15k/Nino-Nakano?style=flat-square&color=green"></a>
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJoseXrl15k%2FNino-Nakano&count_bg=%2379C83D&title_bg=%23555555&icon=probot.svg&icon_color=%2300FF6D&title=visitas&edge_flat=false"/></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/graphs/commit-activity"><img height="20" src="https://img.shields.io/badge/Mantenido%3F-sí-verde.svg"></a>&nbsp;&nbsp;</a>
+<p align="center"><img src="https://profile-counter.glitch.me/{Nino-Nakano}/count.svg" alt="JoseXrl15k :: Conteo de visitantes" old_src="https://profile-counter.glitch.me/{JoseXrl15k}/count.svg" /></p>
+<p align="center">
+<a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="BOT-PÚBLICO" src="https://img.shields.io/static/v1?label=Idioma&message=Español&style=flat-square&color=darkpink"></a> &nbsp;
+  <img src="https://komarev.com/ghpvc/?username=Nino-Nakano&label=VISTAS&style=flat-square&color=blue" />
 </a>
 <p align="center">
-  <a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="Release" src="https://img.shields.io/badge/Release-beta%20v2.3.1-darkcyan.svg?style=for-the-badge&logo=appveyor" /></a>
+  <a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="Release" src="https://img.shields.io/badge/Liberación-beta%20v2.3.1-darkcyan.svg?style=for-the-badge&logo=appveyor" /></a>
 
 <p align='center'>
     </p>
 
-**How to deploy**
+**Ahora despliega.**
 
- [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=monospace-ExtraBold&color=blue&lines=🧸+𝗙𝗢𝗥𝗞+𝗔𝗡𝗗+𝗦𝗧𝗔𝗥+⭐+𝗥𝗘𝗣𝗢+🧸)](https://git.io/typing-svg)
+ [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=monospace-ExtraBold&color=blue&lines=🧸+DEJA+TU+ESTRELLITA+⭐+EN+MI+REPOSITORIO+🧸)](https://git.io/typing-svg)
 
-*_Comienza haciendo un fork de este repositorio a tu propia cuenta de GitHub. Haz clic en el botón de abajo para hacer un fork:_*
-
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/fork"><img title="Nino-Nakano" src="https://img.shields.io/badge/FORK-Nino-Nakanoh?color=darkblue&style=for-the-badge&logo=stackshare"></a>
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/>
 
@@ -67,13 +64,7 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
 
 **• 2 𝗛𝗢𝗦𝗧 𝗢𝗡 𝗗𝗜𝗦𝗖𝗢𝗥𝗗 /PANEL**
 <br>
-> Click below to download the bot file :
-<p align="left">
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD%20FILES-green" alt="Rainhost Files" width="150"></a>
-<br>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/>
-  
-> Click below to deploy on Katabump :
+> Haz clic abajo para desplegar en Katabump :
 <p align="left">
   <a href="https://dashboard.katabump.com/auth/login#203630">
     <img src="https://img.shields.io/badge/Deploy%20to%20Katabump-Hosting-6962a6?style=for-the-badge&logo=katabump&logoColor=red"/>
@@ -81,7 +72,7 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
 <br>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/>
   
-> Click below to deploy on Bot-Hosting :
+> Haz clic abajo para desplegar en Bot-Hosting :
 <p align="left">
   <a href="https://bot-hosting.net/?aff=1231885228566646795">
     <img src="https://img.shields.io/badge/Deploy%20to%20Bot-hosting-9772a6?style=for-the-badge&logo=bothosting&logoColor=white"/>
@@ -91,20 +82,6 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/>
 
 
-<a href="#"><img title="Whatsapp-Bot" src="https://img.shields.io/badge/Whatsapp Bot-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
-</p>
-<p align="center">
-<a href="https://github.com/JoseXrl15k"><img title="Autor" src="https://img.shields.io/badge/AUTOR-JOSE_ELBER-red.svg?style=for-the-badge&logo=github"></a>
-</p>
-<p align="center">
-<a href="https://github.com/JoseXrl15k/followes"><img title="Seguidores" src="https://img.shields.io/github/followers/JoseXrl15k?color=green&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/stargazers/"><img title="Estrellas" src="https://img.shields.io/github/stars/JoseXrl15k/Nino-Nakano?color=red&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/network/members"><img title="Forks" src="https://img.shields.io/github/forks/JoseXrl15k/Nino-Nakano?color=red&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/JoseXrl15k/Nino-Nakano?label=Visitantes&color=blue&style=flat-square"></a>
-</p>
-<h1 align="center"></h1>
-</div>
-
 ### `SI TIENES DUDAS CONTACTA A ESTE NÚMERO`
 <a href="http://wa.me/51904792134" target="blank"><img src="https://img.shields.io/badge/JOSÉ_ELBER-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
 </a>
@@ -112,24 +89,38 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
 <a href="https://chat.whatsapp.com/EteP5pnrAZC14y9wReGF1V" target="blank"><img src="https://img.shields.io/badge/Mahiro_Shina_Support-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
 </a>
 
-> **`🚩 Version Actual: 1.0.1`**
 
 ---------
 
-## <img src="https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif" alt="Características" width="42" height="42"> Características 
+### **`❕️ Información importante`**
 
-> Bot en creación pronto se agregaran más cosas 
+<details>
+ <summary><b> 🧁 Info Bot</b></summary>
+
+* Este proyecto **no está afiliado de ninguna manera** con `WhatsApp`, `Inc. WhatsApp` es una marca registrada de `WhatsApp LLC`, y este bot es un **desarrollo independiente** que **no tiene ninguna relación oficial con la compañía**.
+</details>
+
+<details>
+ <summary><b> 🍰 Funciones de la Bot</b></summary>
+
+> Bot en desarrollo si presenta alguna falla reportar al creador para darle una solución óptima.
 
 - [x] Interacción con voz y texto
 - [x] Configuración de grupo
-- [x] antidelete, antilink, antiarabes, etc
+- [x] antidelete, antilink, antispam, etc
 - [x] Bienvenida personalizada
+- [x] Juegos, tictactoe, mate, etc
 - [x] Chatbot (simsimi)
+- [x] Chatbot (autoresponder)
 - [x] Crear sticker de image/video/gif/url
 - [x] SubBot (Jadibot)
+- [x]    Buscador Google
 - [x] Juego RPG
-- [x] Descarga de música y video de YT
+- [x] Personalizar imagen del menú
+- [x] Descarga de música y video De YT
 - [ ] Otros
+
+</details>
 
 ----------
 
@@ -280,3 +271,83 @@ Si tiene éxito, le dará un mensaje como: `SUCCESS: specified value was saved`.
 ```cmd
 > ffmpeg -version
 ```
+---
+
+### **`☁️ SKY-ULTRA-PLUS`**
+
+<a
+href="https://dash.skyultraplus.com/home"><img src="https://qu.ax/zFzXF.png" height="125px"></a>
+
+<details>
+ <summary><b> 🌩️ Servidor Sky-Ultra-Plus</b></summary>
+
+* Dashboard  [`Dash`](https://dash.skyultraplus.com)
+* Panel [`Panel`](https://panel.skyultraplus.com)
+* Canal de WhatsApp [`Canal Sky`](https://whatsapp.com/channel/0029VakUvreFHWpyWUr4Jr0g)
+* Comunidad  [`Aquí`](https://chat.whatsapp.com/JPwcXvPEUwlEOyjI3BpYys)
+* Contacto(s) [`Gata Dios`](https://wa.me/message/B3KTM5XN2JMRD1) / [`Russell`](https://api.whatsapp.com/send/?phone=15167096032&text&type=phone_number&app_absent=0) / [`elrebelde21`](https://facebook.com/elrebelde21)
+* Discord [`SkyUltraPlus`](https://discord.gg/Ph4eWsZ8)
+
+</details>
+
+---
+
+###  **`☄️ AKIRAX-HOSTING`**
+<a href="https://home.akirax.net"><img src="https://qu.ax/AVgaL.jpg" height="145px"></a>
+
+<details>
+ <summary><b>💠 Servidor Akirax-Hosting</b></summary>
+
+* Dashboard: [`Dash`](https://home.akirax.net)
+* Panel: [`Panel`](https://console.akirax.net)
+* Canal de WhatsApp: [`Canal Akirax`](https://whatsapp.com/channel/0029Vb3Ocrs7IUYNQktqeE11)
+* Comunidad: [`Aquí`](https://chat.whatsapp.com/HekxzfoLBxN1TCwTmrlGcy)
+* Contacto(s): [`Matias`](https://Wa.me/+5491164123932) / [`Tesis`](https://wa.me/522431268546)
+
+</details>
+
+---
+
+### **`🌌 HOSTING-PY`**
+
+<a
+href="https://dahs.hostingpy.shop/home"><img src="https://files.catbox.moe/lr92z2.jpg" height="125px"></a>
+
+<details>
+ <summary><b> 🌠 Servidor HostingPy</b></summary>
+
+* Dashboard  [`Dash`](https://dahs.hostingpy.shop)
+* Panel [`Panel`](https://panel.hostingpy.shop)
+* Canal de WhatsApp [`Canal Py`](https://whatsapp.com/channel/0029Vak4e1R4NVifmh8Tvi3q)
+* Comunidad  [`Aquí`](https://chat.whatsapp.com/HT9YFbWTuqO0DQrq6Xxhvx)
+* Contacto(s) [`Soporte`](https://wa.me/595976126756)
+
+</details>
+
+---
+
+###  **`©️ BRONXYS-HOSTING`**
+<a href="https://bronxyshost.com"><img src="https://tinyurl.com/23qv2kvr" height="145px"></a>
+
+<details>
+ <summary><b>♣️ Servidor Bronxy-Hosting</b></summary>
+
+* Dashboard: [`Dash`](https://bronxyshost.com)
+* Panel: [`Panel`](https://bronxyshost.com)
+* Canal de WhatsApp: [`Canal Bronxy`](https://whatsapp.com/channel/0029Va9l48kHbFV6SQFKz93B)
+* Grupo Oficial: [`Aquí`](https://chat.whatsapp.com/GVQsAe6CAjoJLuotkpnAqq)
+* Grupo Soporte: [`Soporte`](https://wa.me/message/OMZQOH4YZ765K1) 
+
+</details>
+
+---
+
+### **`🌟 Colaboradores`**
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=The-King-Destroy/Yuki_Suou-Bot" /> 
+</a>
+
+### **`👑 Propietario`**
+<a
+href="https://github.com/JoseXrl15k"><img src="https://github.com/JoseXrl15k.png" width="130" height="130" alt="
+JoseXrl15k"/></a>
