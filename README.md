@@ -22,26 +22,19 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
   
 </p> 
 
+<a href="#"><img title="Whatsapp-Bot" src="https://img.shields.io/badge/Whatsapp Bot-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
+</p>
 <p align="center">
-<a href="https://github.com/JoseXrl15k/followers"><img title="Seguidores" src="https://img.shields.io/github/followers/JoseXrl15k?color=purple&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/stargazers/"><img title="Estrellas" src="https://img.shields.io/github/stars/JoseXrl15k/Nino-Nakano?color=blue&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/network/members"><img title="Forks" src="https://img.shields.io/github/forks/JoseXrl15k/Nino-Nakano?color=blue&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/watchers"><img title="Observadores" src="https://img.shields.io/github/watchers/JoseXrl15k/Nino-Nakano?label=Observadores&color=blue&style=flat-square"></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/"><img title="Tamaño" src="https://img.shields.io/github/repo-size/JoseXrl15k/Nino-Nakano?style=flat-square&color=green"></a>
-<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJoseXrl15k%2FNino-Nakano&count_bg=%2379C83D&title_bg=%23555555&icon=probot.svg&icon_color=%2300FF6D&title=visitas&edge_flat=false"/></a>
-<a href="https://github.com/JoseXrl15k/Nino-Nakano/graphs/commit-activity"><img height="20" src="https://img.shields.io/badge/Mantenido%3F-sí-verde.svg"></a>&nbsp;&nbsp;</a>
-<p align="center"><img src="https://profile-counter.glitch.me/{Nino-Nakano}/count.svg" alt="JoseXrl15k :: Conteo de visitantes" old_src="https://profile-counter.glitch.me/{JoseXrl15k}/count.svg" /></p>
+<a href="https://github.com/JoseXrl15k"><img title="Autor" src="https://img.shields.io/badge/AUTOR-JOSE_ELBER-red.svg?style=for-the-badge&logo=github"></a>
+</p>
 <p align="center">
-<a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="" src="https://img.shields.io/static/v1?label=Idioma&message=Español&style=flat-square&color=darkpink"></a> &nbsp;
-  <img src="https://komarev.com/ghpvc/?username=Nino-Nakano&label=VISTAS&style=flat-square&color=blue" />
-</a>
-<p align="center">
-  <a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="Release" src="https://img.shields.io/badge/Liberación-beta%20v2.3.1-darkcyan.svg?style=for-the-badge&logo=appveyor" /></a>
-
-<p align='center'>
-    </p>
-
-**Ahora despliega.**
+<a href="https://github.com/JoseXrl15k/followes"><img title="Seguidores" src="https://img.shields.io/github/followers/JoseXrl15k?color=green&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/stargazers/"><img title="Estrellas" src="https://img.shields.io/github/stars/JoseXrl15k/Nino-Nakano?color=red&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/network/members"><img title="Forks" src="https://img.shields.io/github/forks/JoseXrl15k/Nino-Nakano?color=red&style=flat-square"></a>
+<a href="https://github.com/JoseXrl15k/Nino-Nakano/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/JoseXrl15k/Nino-Nakano?label=Visitantes&color=blue&style=flat-square"></a>
+</p>
+<h1 align="center"></h1>
+</div>
 
  [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=monospace-ExtraBold&color=blue&lines=🧸+DEJA+TU+ESTRELLITA+⭐+🧸)](https://git.io/typing-svg)
 
