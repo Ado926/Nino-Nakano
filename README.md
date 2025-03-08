@@ -32,7 +32,7 @@ src="https://files.catbox.moe/ghwrwi.jpg?"/>
 <a href="https://github.com/JoseXrl15k/Nino-Nakano/graphs/commit-activity"><img height="20" src="https://img.shields.io/badge/Mantenido%3F-sí-verde.svg"></a>&nbsp;&nbsp;</a>
 <p align="center"><img src="https://profile-counter.glitch.me/{Nino-Nakano}/count.svg" alt="JoseXrl15k :: Conteo de visitantes" old_src="https://profile-counter.glitch.me/{JoseXrl15k}/count.svg" /></p>
 <p align="center">
-<a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="BOT-PÚBLICO" src="https://img.shields.io/static/v1?label=Idioma&message=Español&style=flat-square&color=darkpink"></a> &nbsp;
+<a href="https://github.com/JoseXrl15k/Nino-Nakano"><img title="" src="https://img.shields.io/static/v1?label=Idioma&message=Español&style=flat-square&color=darkpink"></a> &nbsp;
   <img src="https://komarev.com/ghpvc/?username=Nino-Nakano&label=VISTAS&style=flat-square&color=blue" />
 </a>
 <p align="center">
@@ -271,80 +271,10 @@ Si tiene éxito, le dará un mensaje como: `SUCCESS: specified value was saved`.
 ```cmd
 > ffmpeg -version
 ```
----
-
-### **`☁️ SKY-ULTRA-PLUS`**
-
-<a
-href="https://dash.skyultraplus.com/home"><img src="https://qu.ax/zFzXF.png" height="125px"></a>
-
-<details>
- <summary><b> 🌩️ Servidor Sky-Ultra-Plus</b></summary>
-
-* Dashboard  [`Dash`](https://dash.skyultraplus.com)
-* Panel [`Panel`](https://panel.skyultraplus.com)
-* Canal de WhatsApp [`Canal Sky`](https://whatsapp.com/channel/0029VakUvreFHWpyWUr4Jr0g)
-* Comunidad  [`Aquí`](https://chat.whatsapp.com/JPwcXvPEUwlEOyjI3BpYys)
-* Contacto(s) [`Gata Dios`](https://wa.me/message/B3KTM5XN2JMRD1) / [`Russell`](https://api.whatsapp.com/send/?phone=15167096032&text&type=phone_number&app_absent=0) / [`elrebelde21`](https://facebook.com/elrebelde21)
-* Discord [`SkyUltraPlus`](https://discord.gg/Ph4eWsZ8)
-
-</details>
-
----
-
-###  **`☄️ AKIRAX-HOSTING`**
-<a href="https://home.akirax.net"><img src="https://qu.ax/AVgaL.jpg" height="145px"></a>
-
-<details>
- <summary><b>💠 Servidor Akirax-Hosting</b></summary>
-
-* Dashboard: [`Dash`](https://home.akirax.net)
-* Panel: [`Panel`](https://console.akirax.net)
-* Canal de WhatsApp: [`Canal Akirax`](https://whatsapp.com/channel/0029Vb3Ocrs7IUYNQktqeE11)
-* Comunidad: [`Aquí`](https://chat.whatsapp.com/HekxzfoLBxN1TCwTmrlGcy)
-* Contacto(s): [`Matias`](https://Wa.me/+5491164123932) / [`Tesis`](https://wa.me/522431268546)
-
-</details>
-
----
-
-### **`🌌 HOSTING-PY`**
-
-<a
-href="https://dahs.hostingpy.shop/home"><img src="https://files.catbox.moe/lr92z2.jpg" height="125px"></a>
-
-<details>
- <summary><b> 🌠 Servidor HostingPy</b></summary>
-
-* Dashboard  [`Dash`](https://dahs.hostingpy.shop)
-* Panel [`Panel`](https://panel.hostingpy.shop)
-* Canal de WhatsApp [`Canal Py`](https://whatsapp.com/channel/0029Vak4e1R4NVifmh8Tvi3q)
-* Comunidad  [`Aquí`](https://chat.whatsapp.com/HT9YFbWTuqO0DQrq6Xxhvx)
-* Contacto(s) [`Soporte`](https://wa.me/595976126756)
-
-</details>
-
----
-
-###  **`©️ BRONXYS-HOSTING`**
-<a href="https://bronxyshost.com"><img src="https://tinyurl.com/23qv2kvr" height="145px"></a>
-
-<details>
- <summary><b>♣️ Servidor Bronxy-Hosting</b></summary>
-
-* Dashboard: [`Dash`](https://bronxyshost.com)
-* Panel: [`Panel`](https://bronxyshost.com)
-* Canal de WhatsApp: [`Canal Bronxy`](https://whatsapp.com/channel/0029Va9l48kHbFV6SQFKz93B)
-* Grupo Oficial: [`Aquí`](https://chat.whatsapp.com/GVQsAe6CAjoJLuotkpnAqq)
-* Grupo Soporte: [`Soporte`](https://wa.me/message/OMZQOH4YZ765K1) 
-
-</details>
-
----
 
 ### **`🌟 Colaboradores`**
 <a href="https://github.com/JoseXrl15k/Nino-Nakano/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=The-King-Destroy/Yuki_Suou-Bot" /> 
+<img src="https://contrib.rocks/image?repo=JoseXrl15k/Nino-Nakano" /> 
 </a>
 
 ### **`👑 Propietario`**
