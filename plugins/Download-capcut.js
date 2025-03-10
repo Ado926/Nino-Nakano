@@ -1,29 +1,29 @@
-/* 
-- Downloader CapCut By Jose XrL
-- Power By Team Code Titans
-- https://whatsapp.com/channel/0029ValMlRS6buMFL9d0iQ0S 
-*/
-// *🍁 [ CapCut Downloader ]*
 
 import axios from 'axios';
 
 let handler = async (m, { conn, args }) => {
-    if (!args[0]) return conn.reply(m.chat, `[ ✰ ]  Ingresa un link de CapCut`, m);
-    if (!args[0].match(/capcut/gi)) return conn.reply(m.chat, `[ ✰ ]  Verifica que el link sea de *CapCut*`, m);
+    if (!args[0]) return conn.reply(m.chat, `[ 🧸 ]  Ingresa un link de CapCut`, m, rcanal);
+    if (!args[0].match(/capcut/gi)) return conn.reply(m.chat, `[ ✰ ]  Verifica que el link sea de *CapCut*`, m, rcanal);
 
     await m.react('🕓');
     try {
-        const response = await axios.get(`https://api.siputzx.my.id/api/d/capcut?url=${encodeURIComponent(args[0])}`);
+        const apiKey = 'freekey';
+        const url = args[0];
+        const apiUrl = `https://api.arixoffc.com/api/dl/capcut?apikey=${apiKey}&url=${encodeURIComponent(url)}`;
+        
+        const response = await axios.get(apiUrl);
         const data = response.data;
 
-        if (data.status) {
-            let videoUrl = data.data.originalVideoUrl;
+        if (data) {
+            const title = data.title;
+            const videoUrl = data.videoUrl;
+            const posterUrl = data.posterUrl;
 
             const videoResponse = await axios.get(videoUrl, { responseType: 'arraybuffer' });
-            await conn.sendFile(m.chat, videoResponse.data, 'video.mp4', 'Aquí tienes tu video de CapCut', m);
+            await conn.sendFile(m.chat, videoResponse.data, 'video.mp4', `Aquí tienes tu video de CapCut: ${title}`, m);
             await m.react('✅');
         } else {
-            await conn.reply(m.chat, `[ ✰ ]  Ocurrió un error: ${data.data}`, m);
+            await conn.reply(m.chat, `[ ✰ ]  Ocurrió un error: No se pudo obtener datos del video.`, m);
             await m.react('✖️');
         }
     } catch (error) {
