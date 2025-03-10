@@ -1,34 +1,52 @@
+/* 
+- Download Playstore By Jose XrL
+- Power By Team Code Titans
+- https://whatsapp.com/channel/0029ValMlRS6buMFL9d0iQ0S 
+*/
+// *🍁 《 Playstore  - Download 》*
 import gplay from 'google-play-scraper';
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, args, usedPrefix: prefix, command }) => {
-  if (!args[0]) {
-    return conn.reply(m.chat, '🚩 Ingresa un link de la PlayStore.\n\nEjemplo:\n' + `> *${usedPrefix + command}* https://play.google.com/store/apps/details?id=com.facebook.lite`, m, rcanal);
-  }
+    m.react('🤍');
 
-  await m.react('🕓');
+    if (!args[0]) {
+        console.log('Argumento vacío, enviando mensaje de ayuda');
+        return conn.reply(m.chat, `*🚩 Ingresa el enlace de la aplicación que deseas descargar de la Play Store.*\n\n*Ejemplo:*\n\`${prefix + command} https://play.google.com/store/apps/details?id=com.whatsapp\``, m, rcanal);
+    }
 
-  const url = `${args[0]}`;
-  const packageName = url.split("=")[1];
-  console.log(packageName);
+    const url = args[0];
 
-  try {
-    const info = await gplay.app({ appId: packageName });
-    const title = info.title;
-    console.log(`${title}\n${info.appId}`);
-    
-    const link = `https://d.apkpure.com/b/APK/${info.appId}?version=latest`;
-    await conn.sendFile(m.chat, link, `${title}.apk`, '', m, false, { 
-      mimetype: 'application/vnd.android.package-archive', 
-      asDocument: true 
-    });
+    let packageName;
+    try {
+        packageName = new URL(url).searchParams.get("id");
+        if (!packageName) throw new Error();
+    } catch {
+        return conn.reply(m.chat, `*❌ La URL proporcionada no es válida o no contiene un ID de aplicación.*`, m, rcanal);
+    }
 
-    await m.react('✅');
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-  }
+    console.log(`ID de paquete: ${packageName}`);
+
+    let info;
+    try {
+        info = await gplay.app({ appId: packageName });
+    } catch (error) {
+        console.error(error);
+        return conn.reply(m.chat, `*❌ No se pudo encontrar la aplicación. Asegúrate de que el enlace sea correcto.*`, m, rcanal);
+    }
+
+    const h = info.title;
+    console.log(`Título de la aplicación: ${h}\nID de la aplicación: ${info.appId}`);
+
+    let link = `https://d.apkpure.com/b/APK/${info.appId}?version=latest`;
+
+    conn.sendFile(m.chat, link, `${h}.apk`, ``, m, false, { mimetype: 'application/vnd.android.package-archive', asDocument: true });
+    m.react('✅️');
+
+    conn.reply(m.chat, `*¡Descarga completada para "${h}"!*`, m, rcanal);
 }
 
-handler.command = /^(dlplaystore)$/i;
+handler.help = ['playstore *<url>*']; 
+handler.tags = ['dl'];
+handler.command = /^(playstore)$/i;
 export default handler;
