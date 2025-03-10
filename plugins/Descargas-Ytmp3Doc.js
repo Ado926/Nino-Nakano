@@ -1,10 +1,21 @@
+/* 
+- Downloader YouTube Audio
+- Comando para descargar audio desde YouTube
+*/
 import axios from 'axios';
 
 const formatAudio = ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'];
 
-const handler = async (m, { conn, text, command }) => {
-  await m.react('✖️');
-  if (!text.trim()) throw `💜 Por favor, ingresa un enlace de YouTube para descargar el audio.`;
+const handler = async (m, { conn, text, command, usedPrefix }) => {
+  if (!text.trim()) {
+    return conn.reply(
+      m.chat,
+      '💜 Por favor, ingresa un enlace de YouTube para descargar el audio.`,
+      m
+    );
+  }
+
+  await m.react('🕓');
 
   const url = text.trim();
 
@@ -12,17 +23,38 @@ const handler = async (m, { conn, text, command }) => {
     try {
       const downloadUrl = await ddownr.download(url, 'mp3');
       await conn.sendMessage(m.chat, {
-        audio: { url: downloadUrl }, 
+        document: { url: downloadUrl }, 
         mimetype: 'audio/mpeg', 
-        fileName: `${Math.random().toString(36).substring(7)}.mp3`
+        contextInfo: {
+          externalAdReply: {
+            title: 'Audio Descargado por Nino-Nakano',
+            body: 'Descarga completada.',
+            mediaType: 1,
+            mediaUrl: null,
+            thumbnailUrl: null,
+            sourceUrl: null,
+            containsAutoReply: true,
+            renderLargerThumbnail: true,
+            showAdAttribution: false,
+          }
+        }
       }, { quoted: m });
       await m.react('✅');
     } catch (error) {
       await m.react('❌');
-      m.reply(`❌ *Error:* ${error.message || 'Error al descargar!'}`);
+      conn.reply(
+        m.chat,
+        `❌ *Error:* ${error.message || 'Error al descargar!'}`,
+        m
+      );
     }
   } else {
-    throw "Comando no reconocido.";
+    await m.react('❌');
+    conn.reply(
+      m.chat,
+      "Comando no reconocido.",
+      m
+    );
   }
 };
 
