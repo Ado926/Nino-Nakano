@@ -81,7 +81,6 @@
 "socket.io": "^4.5.2",
 "tempmail.lol": "^4.1.0",
 "google-play-scraper": "latest",
-"SumiFx-Scraper": "github:BrunoSobrino/SumiFX-Scraper",
 "javascript-obfuscator": "^4.1.0",
 "syntax-error": "^1.4.0",
 "terminal-image": "^2.0.0",
