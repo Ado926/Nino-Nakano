@@ -189,9 +189,7 @@ Si tiene éxito, le dará un mensaje como: `SUCCESS: specified value was saved`.
 ```cmd
 > ffmpeg -version
 ```
----------
-
-<details>
+---
 
 ---------
 
