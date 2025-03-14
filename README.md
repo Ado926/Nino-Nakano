@@ -50,7 +50,7 @@
 <p align="hihg">   
 <a href="https://www.mediafire.com/file/nbe32g0kjl99yul/Termux_0.119.1.apk/file" target="_blank"> <img src="https://img.shields.io/badge/-DESCARGAR_TERMUX-%23E4405F?style=for-the-badge&logo=DESCARGAR_TERMUX&logoColor=black" target="_blank"></a> <img src="https://github.com/DIEGO-OFC/DORRAT-BOT-MD/blob/main/galeria/unnamed.png" height="30px">
 
-### **`🍭 Click en la imagen para obtener termux 🍭`**
+### **`🥟 Click en la imagen para obtener termux 🥢`**
 <a
 href="https://www.mediafire.com/file/3hsvi3xkpq3a64o/termux_118.a"><img src="https://qu.ax/finc.jpg" height="125px"></a>
 
@@ -169,11 +169,9 @@ npm start
 git clone https://github.com/JoseXrl15k/Nino-Nakano && cd Nino-Nakano && npm install && npm update && node .
 ```
 
-</details>
 
 ##### **`💻 Instalación de FFmpeg para Windows`**
 
-<details>
  <summary><b> ⚡️ Comandos2</b></summary>
 
 * Descarga cualquiera de las versiones de FFmpeg disponibles haciendo clic en [FFmpeg](https://www.gyan.dev/ffmpeg/builds/).
