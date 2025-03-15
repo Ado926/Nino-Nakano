@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import yts from 'yt-search';
 import axios from "axios";
 
 const formatAudio = ['mp3', 'm4a', 'webm', 'aac', 'flac', 'opus', 'ogg', 'wav'];
@@ -52,28 +53,26 @@ const ddownr = {
 
 const handler = async (m, { conn, text, command }) => {
   try {
-    const args = text.trim().split(' ');
-    const url = args[0];
-    const format = args[1] || 'mp3';
-
-    if (!url) {
-      return conn.reply(m.chat, `💜 Ingresa la URL de un video de YouTube.`, m);
+    if (!text.trim()) {
+      return conn.reply(m.chat, `💜 Ingresa el nombre del video a descargar.`, m);
     }
 
-    const isValidUrl = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/.test(url);
-    if (!isValidUrl) {
-      return m.reply('Por favor, proporciona una URL válida de YouTube.');
+    const search = await yts(text);
+    if (!search.all || search.all.length === 0) {
+      return m.reply('No se encontraron resultados para tu búsqueda.');
     }
 
-    if (!formatAudio.includes(format.toLowerCase())) {
-      return m.reply(`Formato no soportado. Los formatos válidos son: ${formatAudio.join(', ')}`);
-    }
-
+    const videoInfo = search.all[0];
+    const { title, url } = videoInfo;
+    const format = 'mp3';
     const downloadUrl = await ddownr.download(url, format);
+
     if (downloadUrl) {
+      const fileName = `${title.replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/ +/g, '_')}.${format}`;
       await conn.sendMessage(m.chat, {
         document: { url: downloadUrl },
-        mimetype: "audio/mpeg"
+        mimetype: 'audio/mpeg',
+        fileName: fileName
       }, { quoted: m });
     } else {
       return m.reply(`No se pudo descargar el audio.`);
