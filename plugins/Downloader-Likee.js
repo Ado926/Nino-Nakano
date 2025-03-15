@@ -8,8 +8,7 @@
 import axios from 'axios';
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
-  if (!text) return conn.reply(m.chat, '🚩 Ingresa la URL de Likee que deseas descargar.\n
-`Ejemplo:`\n' + `> *${usedPrefix + command}* https://l.likee.video/v/E4JSK7`, m, rcanal);
+  if (!text) return conn.reply(m.chat, '🚩 Ingresa la URL de Likee que deseas descargar.', m, rcanal);
 
   await m.react('🕓');
 
