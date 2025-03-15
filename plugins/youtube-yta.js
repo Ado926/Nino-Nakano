@@ -1,74 +1,10 @@
-/* 
-- Downloader YouTube Audio
-- Comando para descargar audio desde YouTube
-*/
-import axios from 'axios';
+import fetch from "node-fetch";
+import axios from "axios";
 
-const formatAudio = ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'];
-
-const handler = async (m, { conn, text, command, usedPrefix }) => {
-  if (!text.trim()) {
-    return conn.reply(
-      m.chat,
-      '💜 Por favor, ingresa un enlace de YouTube para descargar el audio.`,
-      m
-    );
-  }
-
-  await m.react('🕓');
-
-  const url = text.trim();
-
-  if (command === 'ytva' || command === 'yta' || command === 'ytmp3') {
-    try {
-      const downloadUrl = await ddownr.download(url, 'mp3');
-      await conn.sendMessage(m.chat, {
-        audio: { url: downloadUrl }, 
-        mimetype: 'audio/mpeg', 
-        contextInfo: {
-          externalAdReply: {
-            title: 'Audio Descargado por Nino-Nakano',
-            body: 'Descarga completada.',
-            mediaType: 1,
-            mediaUrl: null,
-            thumbnailUrl: null,
-            sourceUrl: null,
-            containsAutoReply: true,
-            renderLargerThumbnail: true,
-            showAdAttribution: false,
-          }
-        }
-      }, { quoted: m });
-      await m.react('✅');
-    } catch (error) {
-      await m.react('❌');
-      conn.reply(
-        m.chat,
-        `❌ *Error:* ${error.message || 'Error al descargar!'}`,
-        m
-      );
-    }
-  } else {
-    await m.react('❌');
-    conn.reply(
-      m.chat,
-      "Comando no reconocido.",
-      m
-    );
-  }
-};
-
-handler.command = ['ytmp3', 'yta', 'ytva'];
-handler.tags = ['downloader'];
-
-export default handler;
+const formatAudio = ['mp3', 'm4a', 'webm', 'aac', 'flac', 'opus', 'ogg', 'wav'];
 
 const ddownr = {
   download: async (url, format) => {
-    if (!formatAudio.includes(format)) {
-      throw new Error('Formato no soportado.');
-    }
-
     const config = {
       method: 'GET',
       url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
@@ -90,6 +26,7 @@ const ddownr = {
       throw error;
     }
   },
+
   cekProgress: async (id) => {
     const config = {
       method: 'GET',
@@ -112,3 +49,41 @@ const ddownr = {
     }
   }
 };
+
+const handler = async (m, { conn, text, command }) => {
+  try {
+    const args = text.trim().split(' ');
+    const url = args[0];
+    const format = args[1] || 'mp3';
+
+    if (!url) {
+      return conn.reply(m.chat, `💜 Ingresa la URL de un video de YouTube.`, m);
+    }
+
+    const isValidUrl = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/.test(url);
+    if (!isValidUrl) {
+      return m.reply('Por favor, proporciona una URL válida de YouTube.');
+    }
+
+    if (!formatAudio.includes(format.toLowerCase())) {
+      return m.reply(`Formato no soportado. Los formatos válidos son: ${formatAudio.join(', ')}`);
+    }
+
+    const downloadUrl = await ddownr.download(url, format);
+    if (downloadUrl) {
+      await conn.sendMessage(m.chat, {
+        audio: { url: downloadUrl },
+        mimetype: "audio/mpeg"
+      }, { quoted: m });
+    } else {
+      return m.reply(`No se pudo descargar el audio.`);
+    }
+  } catch (error) {
+    return m.reply(`Ocurrió un error: ${error.message}`);
+  }
+};
+
+handler.command = handler.help = ['ytmp3', 'yta'];
+handler.tags = ['downloader'];
+
+export default handler;
