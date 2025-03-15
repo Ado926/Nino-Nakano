@@ -1,47 +1,35 @@
-/* 
-- Downloader Likee By Jose
-- Power By Team Code Titans
-- https://whatsapp.com/channel/0029ValMlRS6buMFL9d0iQ0S 
-*/
-// *🍁 [ Likee Video Downloader ]*
-
 import axios from 'axios';
 
-let handler = async (m, { conn, usedPrefix, command, text }) => {
-  if (!text) {
-    return conn.reply(m.chat, '🚩 Ingresa la URL de Likee que deseas descargar.', m);
-  }
+let handler = async (m, { conn, args }) => {
+    if (!args[0]) return conn.reply(m.chat, `[ 🧸 ]  Ingresa un link de Likee`, m, rcanal);
+    if (!args[0].match(/likee/gi)) return conn.reply(m.chat, `[ ✰ ]  Verifica que el link sea de *Likee*`, m, rcanal);
 
-  await m.react('🕓');
+    await m.react('🕓');
+    try {
+        const url = args[0];
+        const apiUrl = `https://apis-starlights-team.koyeb.app/starlight/like-downloader?url=${encodeURIComponent(url)}`;
+        
+        const response = await axios.get(apiUrl);
+        const data = response.data;
 
-  try {
-    const response = await axios.get(`https://apis-starlights-team.koyeb.app/starlight/like-downloader?url=${encodeURIComponent(text)}`);
-
-    if (response.data) {
-      const videoData = response.data;
-
-      let txt = '`乂  L I K E E  -  D O W N L O A D`\n';
-      txt += `    ✩  *Creador* : ${videoData.creator}\n`;
-      txt += `    ✩  *Caption* : ${videoData.caption}\n\n`;
-      txt += `> 🚩 Enlace con marca de agua: ${videoData.links.watermark}\n`;
-      txt += `> 🚩 Enlace sin marca de agua: ${videoData.links['no watermark']}`;
-
-      await conn.sendMessage(m.chat, { video: { url: videoData.links['no watermark'] }, caption: txt }, { quoted: m });
-      await m.react('✅');
-    } else {
-      await m.react('✖️');
-      await conn.reply(m.chat, '🚩 Error al obtener datos desde Likee.', m);
+        if (data && data.links && data.links["no watermark"]) {
+            const videoWithoutWatermark = data.links["no watermark"];
+            await conn.sendMessage(m.chat, { url: videoWithoutWatermark }, { quoted: m });
+            await m.react('✅');
+        } else {
+            await conn.reply(m.chat, `[ ✰ ]  Ocurrió un error: No se pudo obtener el video sin marca de agua.`, m);
+            await m.react('✖️');
+        }
+    } catch (error) {
+        console.error(error);
+        await conn.reply(m.chat, `[ ✰ ]  Ocurrió un error al procesar tu solicitud.`, m);
+        await m.react('✖️');
     }
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-    await conn.reply(m.chat, '🚩 Hubo un error al procesar la solicitud. Intenta de nuevo más tarde.', m);
-  }
-}
+};
 
+handler.help = ['likeedownload *<url>*'];
 handler.tags = ['downloader'];
-handler.help = ['likee *<url>*'];
-handler.command = ['likee', 'likedl', 'likeedownloader'];
+handler.command = ['likee', 'likedownload'];
 handler.register = true;
 
 export default handler;
