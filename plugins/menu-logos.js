@@ -4,13 +4,13 @@ const handler = async (m, { conn, usedPrefix }) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
 
   try {
-    const videoUrl = "https://qu.ax/ypJww.mp4";
-    const d = new Date(new Date + 3600000);
+    const imageUrl = "https://qu.ax/DPlAj.jpg"; 
+    const d = new Date(new Date() + 3600000);
     const locale = 'es-ES';
     const week = d.toLocaleDateString(locale, { weekday: 'long' });
     const date = d.toLocaleDateString(locale, { day: '2-digit', month: '2-digit', year: 'numeric' });
 
-    await conn.sendMessage(m.chat, { react: { text: '🍇', key: m.key } });
+    await conn.sendMessage(m.chat, { react: { text: '🐇', key: m.key } });
 
     const str = `┈──────────────────────⏣
            ⏤͟͟͞͞ᵡ    *M E N U   L O G O S*   ᵡ͟͟͞͞⏤
@@ -71,38 +71,25 @@ const handler = async (m, { conn, usedPrefix }) => {
    ⏣ • _!angeltxt_
    ⏣ • _!starlight_`;
 
+    const fkontak2 = {
+      'key': {
+        'participants': '0@s.whatsapp.net',
+        'remoteJid': 'status@broadcast',
+        'fromMe': false,
+        'id': 'Halo'
+      },
+      'message': {
+        'contactMessage': {
+          'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+        }
+      },
+      'participant': '0@s.whatsapp.net'
+    };
+
     if (m.isGroup) {
-      const fkontak2 = {
-        'key': {
-          'participants': '0@s.whatsapp.net',
-          'remoteJid': 'status@broadcast',
-          'fromMe': false,
-          'id': 'Halo'
-        },
-        'message': {
-          'contactMessage': {
-            'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-          }
-        },
-        'participant': '0@s.whatsapp.net'
-      };
-      conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net') }, { quoted: m });
+      await conn.sendMessage(m.chat, { image: { url: imageUrl }, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net') }, { quoted: m });
     } else {
-      const fkontak2 = {
-        'key': {
-          'participants': '0@s.whatsapp.net',
-          'remoteJid': 'status@broadcast',
-          'fromMe': false,
-          'id': 'Halo'
-        },
-        'message': {
-          'contactMessage': {
-            'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-          }
-        },
-        'participant': '0@s.whatsapp.net'
-      };
-      conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net') }, { quoted: fkontak2 });
+      await conn.sendMessage(m.chat, { image: { url: imageUrl }, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net') }, { quoted: fkontak2 });
     }
   } catch {
     conn.reply(m.chat, '*🍇 Error Al Enviar!.*', m);
