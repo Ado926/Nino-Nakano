@@ -32,7 +32,6 @@ const defaultMenu = {
 
 ┌  ◦ *Creador:*  Jose Elber
 │  ◦ *Modo:* Público
-│  ◦ *Total de comandos:* %totalCommands
 │  ◦ *Baileys:* Multi Device
 │  ◦ *Tiempo Activa:* %muptime
 └  ◦ *Usuarios:* %totalreg
@@ -105,7 +104,6 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
           if (!(tag in tags) && tag) tags[tag] = tag
     conn.menu = conn.menu ? conn.menu : {}
     let before = conn.menu.before || defaultMenu.before
-    let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     let header = conn.menu.header || defaultMenu.header
     let body = conn.menu.body || defaultMenu.body
     let footer = conn.menu.footer || defaultMenu.footer
