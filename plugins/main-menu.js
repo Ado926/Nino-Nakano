@@ -12,8 +12,6 @@ let tags = {
   'xp': 'Exp',
   'sticker': 'Stickers',
   'anime': 'Animes',
-  'database': 'Database',
-  'fix': 'Fix Mensaje',
   'grupo': 'Grupos',
   'nable': 'On / Off',
   'descargas': 'Descargas',
@@ -22,7 +20,6 @@ let tags = {
   'nsfw': 'Nsfw',
   'owner': 'Creador',
   'mods': 'Staff',
-  'audio': 'Audios',
   'ai': 'Ia',
   'transformador': 'Convertidores'
 };
@@ -33,18 +30,19 @@ const defaultMenu = {
   
   *\`乂  I N F O  -  B O T\`*
 
-┌  ◦ *Cʀᴇᴀᴅᴏʀ:*  Jose Elber
-│  ◦ *Mᴏᴅᴏ:* Público
-│  ◦ *Bᴀɪʟᴇʏs:* Multi Device
-│  ◦ *Tɪᴇᴍᴘᴏ ᴀᴄᴛɪᴠᴏ:* %muptime
-└  ◦ *Usᴜᴀʀɪᴏs:* %totalreg
+┌  ◦ *Creador:*  Jose Elber
+│  ◦ *Modo:* Público
+│  ◦ *Total de comandos:* %totalCommands
+│  ◦ *Baileys:* Multi Device
+│  ◦ *Tiempo Activa:* %muptime
+└  ◦ *Usuarios:* %totalreg
 
   *\`乂  I N F O  -  U S U A R I O\`*
   
-┌  ◦ *Cʟɪᴇɴᴛᴇ:* %name
-│  ◦ *Exᴘ:* %exp
-│  ◦ *Nɪᴠᴇʟ:* %level
-└  ◦ *Rᴀɴɢᴏ:* %role
+┌  ◦ *Usuario:* %name
+│  ◦ *Exp:* %exp
+│  ◦ *Nivel:* %level
+└  ◦ *Rango:* %role
    
 *– L I S T A   D E   C O M A N D O S*\n
 `.trimStart(),
@@ -107,6 +105,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
           if (!(tag in tags) && tag) tags[tag] = tag
     conn.menu = conn.menu ? conn.menu : {}
     let before = conn.menu.before || defaultMenu.before
+    let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     let header = conn.menu.header || defaultMenu.header
     let body = conn.menu.body || defaultMenu.body
     let footer = conn.menu.footer || defaultMenu.footer
@@ -188,7 +187,7 @@ m.react('🍓');
 
 handler.help = ['menu'];
 handler.tags = ['main'];
-handler.command = /^(allmenu|menu|help|menú|\?)$/i;
+handler.command = /^(allmenu|menucompleto|allhelp|allmenú|\?)$/i;
 handler.register = true;
 
 export default handler;
