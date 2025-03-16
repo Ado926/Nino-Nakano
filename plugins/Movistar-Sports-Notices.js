@@ -1,51 +1,45 @@
+
 import axios from 'axios';
 
-let handler = async (m, { conn, usedPrefix, command, args }) => {
+let handler = async (m, { conn }) => {
+  try {
     await m.react('🕓');
+    
+    const response = await axios.get('https://delirius-apiofc.vercel.app/tools/movistar');
+    
+    if (response.status === 200 && response.data.status === true) {
+      let newsArray = response.data.data;
+      
+      if (newsArray.length === 0) {
+        await m.reply('No hay noticias disponibles en este momento.');
+        return;
+      }
 
-    if (!args[0]) {
-        return conn.reply(m.chat, `🚩 Por favor ingresa un texto para buscar deportes. Ejemplo:\n> *${usedPrefix + command}* fútbol`, m, rcanal);
+      let text = '`乂  M O V I S T A R  -  N O T I C I A S`\n\n';
+      
+      for (let news of newsArray) {
+        text += `✩ *Título*: ${news.title}\n`;
+        text += `✩ *Descripción*: ${news.description}\n`;
+        text += `✩ *URL*: ${news.url}\n`;
+        text += `✩ *Imagen*: ${news.image}\n\n`;
+      }
+      
+      await conn.sendMessage(m.chat, { text: text }, { quoted: m });
+      await m.react('✅');
+    } else {
+      await m.react('✖️');
+      await conn.reply(m.chat, 'Error al obtener las noticias de Movistar Deportes.', m);
     }
+  } catch (error) {
+    console.error(error);
+    await m.react('✖️');
+    await conn.reply(m.chat, 'Hubo un error al procesar la solicitud. Intenta de nuevo más tarde.', m);
+  }
+}
 
-    const searchText = args.join(' ').toLowerCase();
-
-    try {
-        const response = await axios.get('https://delirius-apiofc.vercel.app/tools/movistar');
-        const { status, data } = response.data;
-
-        if (!status) return conn.reply(m.chat, '🚩 No se pudo obtener la información, inténtalo de nuevo más tarde.', m);
-
-        const filteredData = data.filter(item =>
-            item.title.toLowerCase().includes(searchText) ||
-            item.description.toLowerCase().includes(searchText)
-        );
-
-        if (filteredData.length === 0) {
-            return conn.reply(m.chat, `🚫 No se encontraron noticias sobre "${searchText}".`, m);
-        }
-
-        let txt = '`乂 M O V I S T A R  -  N O T I C I A S`\n\n';
-
-        filteredData.forEach((item, index) => {
-            txt += `✩ ${index + 1}. *Título*: ${item.title}\n`;
-            txt += `✩ *Descripción*: ${item.description}\n`;
-            txt += `✩ *Link*: ${item.url}\n`;
-            txt += `✩ *Imagen*: ${item.image}\n\n`;
-        });
-
-        await conn.reply(m.chat, txt, m);
-        await m.react('✅');
-    } catch (error) {
-        await m.react('✖️');
-        console.error(error);
-        conn.reply(m.chat, '🚩 Ocurrió un error al obtener la información.', m);
-    }
-};
-
-// Configuración del comando
-handler.help = ['movistar *<texto>*'];
-handler.tags = ['informacion'];
-handler.command = ['movistar'];
+handler.tags = ['noticias'];
+handler.help = ['movistar-noticias'];
+handler.command = ['movistarnews', 'movistar'];
 handler.register = true;
 
 export default handler;
