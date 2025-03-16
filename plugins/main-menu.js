@@ -185,7 +185,7 @@ m.react('🍓');
 
 handler.help = ['menu'];
 handler.tags = ['main'];
-handler.command = /^(allmenu|menucompleto|allhelp|allmenú|\?)$/i;
+handler.command = /^(menulist|menu|help|menú|\?)$/i;
 handler.register = true;
 
 export default handler;
