@@ -1,36 +1,33 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args.length) {
-        return conn.reply(m.chat, `🍬 *Por favor escribe un mod a buscar.*\nEjemplo: ${usedPrefix}${command} armas`, m, rcanal);
-    }
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) return conn.reply(m.chat, `🚩 Ingrese el nombre del mod que busca.\n\nEjemplo:\n> *${usedPrefix + command}* Minecraft`, m, rcanal);
 
-    const query = args.join(' '); 
     await m.react('🕓');
-    
+
     try {
-        const response = await fetch(`https://api.dorratz.com/v2/mc-java?q=${query}`);
-        const data = await response.json();
-        
-        if (!data || !data.addons || data.addons.length === 0) {
-            return conn.reply(m.chat, `🚫 No se encontraron mods para "${query}".`, m);
+        const response = await axios.get(`https://api.dorratz.com/v2/happymod-s?query=${encodeURIComponent(text)}`);
+        const mods = response.data;
+
+        if (!mods || mods.length === 0) {
+            return conn.reply(m.chat, `😞 No se encontraron mods relacionados con "${text}".`, m);
         }
 
-        let txt = '🛠️  R E S U L T A D O S  -  M O D S\n\n';
-        
-        data.addons.forEach(addon => {
-            txt += `✨ *Título*: ${addon.title}\n`;
-            txt += `📜 *Descripción*: ${addon.description}\n`;
-            txt += `🔗 *Enlace*: ${addon.link}\n`;
-            txt += `🖼️ *Imagen*: ${addon.image}\n\n`;
+        let msg = '🛠️  R E S U L T A D O S  -  M O D S\n\n';
+        mods.forEach(mod => {
+            msg += `✩   Nombre : ${mod.name}\n`;
+            msg += `✩   Creador : ${mod.creator}\n`;
+            msg += `✩   Calificación : ${mod.rating}\n`;
+            msg += `✩   Enlace : ${mod.link}\n`;
+            msg += `✩   Icono : ${mod.icon}\n\n`;
         });
 
-        await conn.sendMessage(m.chat, { image: { url: addon.image }, caption: txt }, { quoted: m });
+        await conn.sendMessage(m.chat, { text: msg }, { quoted: m });
         await m.react('✅');
     } catch (error) {
         console.error(error);
         await m.react('✖️');
-        conn.reply(m.chat, '❌ Hubo un error al procesar la solicitud.', m);
+        conn.reply(m.chat, `Error al obtener información sobre el mod.`, m);
     }
 };
 
