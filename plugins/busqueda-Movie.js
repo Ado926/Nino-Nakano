@@ -15,7 +15,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       return await conn.reply(m.chat, 'No se encontraron resultados para esta búsqueda.', m);
     }
 
-    let txt = '`🎬 Resultados de la búsqueda`\n\n';
+    let txt = '`M O V I E  -  S E A R C H`\n\n';
     json.data.forEach((movie, index) => {
       txt += `✩ ${index + 1}. *Título:* ${movie.title}\n`;
       txt += `✩  *Fecha de lanzamiento:* ${movie.release_date}\n`;
@@ -25,7 +25,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       txt += `✩  *Enlace:* ${movie.video ? 'Ver video' : 'Sin video disponible'}\n\n`;
     });
 
-    await conn.reply(m.chat, txt, m, rcanal);
+    await conn.sendMessage(m.chat, { image: { url: movie.image }, caption: txt }, { quoted: m });
     await m.react('✅');
   } catch (error) {
     console.error(error);
