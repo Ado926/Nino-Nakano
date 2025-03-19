@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
     if (!args.length) {
-        return conn.reply(m.chat, `🔍 *Por favor escribe un mod a buscar.*\nEjemplo: ${usedPrefix}${command} armas`, m, rcanal);
+        return conn.reply(m.chat, `🍬 *Por favor escribe un mod a buscar.*\nEjemplo: ${usedPrefix}${command} armas`, m, rcanal);
     }
 
     const query = args.join(' '); 
@@ -25,7 +25,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
             txt += `🖼️ *Imagen*: ${addon.image}\n\n`;
         });
 
-        await conn.reply(m.chat, txt.trim(), m);
+        await conn.sendMessage(m.chat, { image: { url: addon.image }, caption: txt }, { quoted: m });
         await m.react('✅');
     } catch (error) {
         console.error(error);
