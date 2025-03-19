@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(m.chat, `🍇 Ingrese un término de búsqueda.\n\nEjemplo:\n> *${usedPrefix + command}* CapCut`, m, rcanal);
+    return conn.reply(m.chat, `🍬 Ingrese un término de búsqueda.\n\nEjemplo:\n> *${usedPrefix + command}* CapCut`, m, rcanal);
   }
 
   await m.react('🕓');
@@ -16,7 +16,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       return conn.reply(m.chat, 'No se encontraron resultados para esta búsqueda.', m);
     }
 
-    let txt = '🎮 Resultados de la búsqueda:\n\n';
+    let txt = 'A N I 1  -  S E A R C H\n\n';
     json.data.forEach(result => {
       txt += `*Nombre:* ${result.name}\n`;
       txt += `*Título:* ${result.title}\n`;
@@ -29,7 +29,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       txt += `*Enlace de descarga:* ${result.download}\n\n`;
     });
 
-    await conn.reply(m.chat, txt, m);
+    await conn.sendMessage(m.chat, { image: { url: 'https://qu.ax/DFPFC.jpg' }, caption: txt }, { quoted: m });
     await m.react('✅');
 
   } catch (error) {
