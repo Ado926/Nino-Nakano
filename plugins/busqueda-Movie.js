@@ -1,37 +1,35 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(m.chat, `🚩 Por favor, ingrese un término de búsqueda.\n\nEjemplo:\n> *${usedPrefix + command}* blackpink`, m, rcanal);
-  }
+    if (!text) return conn.reply(m.chat, `🚩 Ingrese el nombre de la película que busca.\n\nEjemplo:\n> *${usedPrefix + command}* BLACKPINK`, m, rcanal);
 
-  await m.react('🕓');
-  try {
-    const res = await fetch(`https://delirius-apiofc.vercel.app/search/movie?query=${text}`);
-    const json = await res.json();
+    await m.react('🕓');
 
-    if (!json.status || !json.data || json.data.length === 0) {
-      await m.react('✖️');
-      return await conn.reply(m.chat, 'No se encontraron resultados para esta búsqueda.', m);
+    try {
+        const response = await axios.get(`https://delirius-apiofc.vercel.app/search/movie?query=${encodeURIComponent(text)}`);
+        const movies = response.data.data;
+
+        if (!movies || movies.length === 0) {
+            return conn.reply(m.chat, `😞 No se encontraron películas relacionadas con "${text}".`, m);
+        }
+
+        let msg = '`M O V I E  -  S E A R C H`\n\n';
+        const firstMovie = movies[0];
+
+        msg += `✩   Título : ${firstMovie.title}\n`;
+        msg += `✩   Fecha de lanzamiento : ${firstMovie.release_date}\n`;
+        msg += `✩   Calificación : ${firstMovie.vote_average}\n`;
+        msg += `✩   Resumen : ${firstMovie.overview}\n`;
+        
+        const image = firstMovie.image;
+
+        await conn.sendMessage(m.chat, { image: { url: image }, caption: msg }, { quoted: m });
+        await m.react('✅');
+    } catch (error) {
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, `Error al obtener información sobre la película.`, m);
     }
-
-    let txt = '`M O V I E  -  S E A R C H`\n\n';
-    json.data.forEach((movie, index) => {
-      txt += `✩ ${index + 1}. *Título:* ${movie.title}\n`;
-      txt += `✩  *Fecha de lanzamiento:* ${movie.release_date}\n`;
-      txt += `✩  *Calificación:* ${movie.vote_average} (${movie.vote_count} votos)\n`;
-      txt += `✩  *Resumen:* ${movie.overview}\n`;
-      txt += `✩  *Imagen:* ${movie.image}\n`;
-      txt += `✩  *Enlace:* ${movie.video ? 'Ver video' : 'Sin video disponible'}\n\n`;
-    });
-
-    await conn.sendMessage(m.chat, { image: { url: movie.image }, caption: txt }, { quoted: m });
-    await m.react('✅');
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-    await conn.reply(m.chat, 'Hubo un error al procesar la solicitud. Intenta de nuevo más tarde.', m);
-  }
 };
 
 handler.help = ['movie <término>'];
