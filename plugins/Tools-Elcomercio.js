@@ -1,35 +1,35 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(m.chat, `🍬 Ingrese un término de búsqueda.\n\nEjemplo:\n> *${usedPrefix + command}* castillo`, m, rcanal);
-  }
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) return conn.reply(m.chat, `🚩 Ingrese el término que desea buscar.\n\nEjemplo:\n> *${usedPrefix + command}* Castillo`, m, rcanal);
 
-  await m.react('🕓');
-  try {
-    const res = await fetch(`https://delirius-apiofc.vercel.app/tools/elcomercio?query=${encodeURIComponent(text)}`);
-    const json = await res.json();
+    await m.react('🕓');
 
-    if (!json.data || json.data.length === 0) {
-      await m.react('✖️');
-      return await conn.reply(m.chat, 'No se encontraron resultados para esta búsqueda.', m);
+    try {
+        const response = await axios.get(`https://delirius-apiofc.vercel.app/tools/elcomercio?query=${encodeURIComponent(text)}`);
+        const { status, data } = response.data;
+
+        if (!status || data.length === 0) {
+            return conn.reply(m.chat, `😞 No se encontró información sobre "${text}".`, m);
+        }
+
+        let messageText = '`乂  I N F O R M A C I Ó N -  B Ú S Q U E`\n\n';
+        
+        data.forEach(item => {
+            const { title, publish, url, image } = item;
+            messageText += `✩  *Título*: ${title}\n`;
+            messageText += `✩  *Publicado*: ${publish}\n`;
+            messageText += `✩  *Enlace*: ${url}\n`;
+            messageText += `✩  *Imagen*: ${image}\n\n`;
+        });
+
+        await conn.sendMessage(m.chat, { text: messageText }, { quoted: m });
+        await m.react('✅');
+    } catch (error) {
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, `Error al obtener información.`, m);
     }
-
-    let responseText = '`E L  C O M E R C I O  -  S E A R C H`\n\n';
-    json.data.forEach(article => {
-      responseText += `*Título:* ${article.title}\n`;
-      responseText += `*Publicación:* ${article.publish}\n`;
-      responseText += `*URL:* ${article.url}\n`;
-      responseText += `*Imagen:* ${article.image}\n\n`;
-    });
-
-    await conn.sendMessage(m.chat, { image: { url: article.image }, caption: responseText }, { quoted: m });
-    await m.react('✅');
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-    await conn.reply(m.chat, 'Hubo un error al procesar la solicitud. Intenta de nuevo más tarde.', m);
-  }
 };
 
 handler.help = ['elcomerciope <término>'];
