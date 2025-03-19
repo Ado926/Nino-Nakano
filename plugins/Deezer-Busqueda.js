@@ -1,39 +1,37 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-let handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) return conn.reply(m.chat, '🚩 Ingresa el título de la canción que deseas buscar en Deezer.\n\nEjemplo:\n' + `> *${usedPrefix + command}* Feel Special`, m, rcanal);
-  await m.react('🕓');
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) return conn.reply(m.chat, `🚩 Ingrese el nombre de la canción.\n\nEjemplo:\n> *${usedPrefix + command}* Feel Special`, m, rcanal);
+    await m.react('🕓');
 
-  try {
-    let res = await fetch(`https://delirius-apiofc.vercel.app/search/deezer?q=${encodeURIComponent(text)}`);
-    let json = await res.json();
+    try {
+        const response = await axios.get(`https://delirius-apiofc.vercel.app/search/deezer?q=${encodeURIComponent(text)}`);
+        const { status, data } = response.data;
 
-    if (!json.data || json.data.length === 0) {
-      return conn.reply(m.chat, 'No se encontraron resultados para tu búsqueda.', m);
+        if (!status || data.length === 0) {
+            return conn.reply(m.chat, `😞 No se pudo encontrar canciones para "${text}".`, m);
+        }
+
+        let txt = '`乂  D E E Z E R  -  B Ú S Q U E`\n\n';
+        
+        for (let song of data) {
+            txt += `✩   Título: ${song.title}\n`;
+            txt += `✩   Artista: ${song.artist}\n`;
+            txt += `✩   Duración: ${song.duration}\n`;
+            txt += `✩   URL: ${song.url}\n`;
+            txt += `✩   Escuchar: ${song.preview}\n\n`;
+        }
+
+        const image = data[0].image;
+
+        await conn.sendMessage(m.chat, { image: { url: image }, caption: txt }, { quoted: m });
+        await m.react('✅');
+    } catch (error) {
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, `Error al obtener información de la canción.`, m);
     }
-
-    let txt = '`乂  D E E Z E R  -  B Ú S Q U E`';
-
-    for (let i = 0; i < json.data.length; i++) {
-      let track = json.data[i];
-      txt += `\n\n`;
-      txt += `  *» Nro* : ${i + 1}\n`;
-      txt += `  *» Título* : ${track.title}\n`;
-      txt += `  *» Artista* : ${track.artist}\n`;
-      txt += `  *» Duración* : ${track.duration}\n`;
-      txt += `  *» Rango* : ${track.rank}\n`;
-      txt += `  *» URL de la pista* : ${track.url}\n`;
-      txt += `  *» Previo* : ${track.preview}\n`;
-      txt += `  *» Imagen* : ${track.image}\n`;
-    }
-
-    await conn.sendMessage(m.chat, { image: { track.image }, caption: txt }, { quoted: m });
-    await m.react('✅');
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-  }
-}
+};
 
 handler.help = ['deezersearch *<búsqueda>*'];
 handler.tags = ['search'];
