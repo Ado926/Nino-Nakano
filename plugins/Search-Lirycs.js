@@ -25,7 +25,7 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
     txt += `  *» Imagen* : ${result.thumb}\n`;
     txt += `  *» Letra* :\n${result.lyrics}\n`;
 
-    await conn.reply(m.chat, txt, m, rcanal);
+    await conn.sendMessage(m.chat, { image: { url: result.thumb }, caption: txt }, { quoted: m });
     await m.react('✅');
   } catch (error) {
     console.error(error);
