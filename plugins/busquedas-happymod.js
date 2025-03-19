@@ -1,40 +1,35 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-const api = "https://dark-core-api.vercel.app/api/search/happymod?key=api&text=";
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) return conn.reply(m.chat, `🚩 Ingrese el nombre del juego.\n\nEjemplo:\n> *${usedPrefix + command}* Minecraft`, m, rcanal);
 
-let handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) return conn.reply(m.chat, '🚩 Ingresa el texto de lo que quieres buscar en Happymod.\n\nEjemplo:\n' + `> *${usedPrefix + command}* minecraft`, m, rcanal);
-  await m.react('🕓');
+    await m.react('🕓');
 
-  try {
-    let url = `${api}${encodeURIComponent(text)}`;
-    let res = await fetch(url);
-    let json = await res.json();
+    try {
+        const response = await axios.get(`https://api.dorratz.com/v2/happymod-s?query=${encodeURIComponent(text)}`);
+        const mods = response.data;
 
-    if (!json.success) {
-      return conn.reply(m.chat, 'No se encontraron resultados para tu búsqueda.', m);
+        if (!mods || mods.length === 0) {
+            return conn.reply(m.chat, `😞 No se pudo encontrar mods para "${text}".`, m);
+        }
+
+        let message = '`乂  H A P P Y M O D  -  B Ú S Q U E`';
+        mods.forEach(mod => {
+            message += `  ✩   Nombre : ${mod.name}\n`;
+            message += `  ✩   Creador : ${mod.creator}\n`;
+            message += `  ✩   Valoración : ${mod.rating}\n`;
+            message += `  ✩   Enlace : ${mod.link}\n`;
+            message += `  ✩   Icono : ${mod.icon}\n\n`;
+        });
+
+        await conn.sendMessage(m.chat, { text: message }, { quoted: m });
+        await m.react('✅');
+    } catch (error) {
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, `Error al obtener la información de los mods.`, m);
     }
-
-    let txt = '`乂  H A P P Y M O D  -  B Ú S Q U E`';
-
-    for (let i = 0; i < json.results.length; i++) {
-      let result = json.results[i];
-      txt += `\n\n`;
-      txt += `  *» Nro* : ${i + 1}\n`;
-      txt += `  *» Titulo* : ${result.name}\n`;
-      txt += `  *» Calificación* : ${result.stars}\n`;
-      txt += `  *» Enlace* : ${result.link}\n`;
-      txt += `  *» Descripción* : ${result.description}\n`;
-      txt += `  *» Imagen* : ${result.image}\n`;
-    }
-
-    await conn.sendMessage(m.chat, { image: { url: result.image }, caption: txt }, { quoted: m });
-    await m.react('✅');
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-  }
-}
+};
 
 handler.help = ['happymodsearch *<búsqueda>*'];
 handler.tags = ['search'];
