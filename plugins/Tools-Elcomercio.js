@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(m.chat, `🍇 Ingrese un término de búsqueda.\n\nEjemplo:\n> *${usedPrefix + command}* castillo`, m, rcanal);
+    return conn.reply(m.chat, `🍬 Ingrese un término de búsqueda.\n\nEjemplo:\n> *${usedPrefix + command}* castillo`, m, rcanal);
   }
 
   await m.react('🕓');
@@ -15,7 +15,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       return await conn.reply(m.chat, 'No se encontraron resultados para esta búsqueda.', m);
     }
 
-    let responseText = '`📄 Resultados de la búsqueda`\n\n';
+    let responseText = '`E L  C O M E R C I O  -  S E A R C H`\n\n';
     json.data.forEach(article => {
       responseText += `*Título:* ${article.title}\n`;
       responseText += `*Publicación:* ${article.publish}\n`;
@@ -23,7 +23,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       responseText += `*Imagen:* ${article.image}\n\n`;
     });
 
-    await conn.reply(m.chat, responseText, m);
+    await conn.sendMessage(m.chat, { image: { url: article.image }, caption: responseText }, { quoted: m });
     await m.react('✅');
   } catch (error) {
     console.error(error);
