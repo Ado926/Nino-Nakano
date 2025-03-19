@@ -21,7 +21,7 @@ let handler = async (m, { conn, text }) => {
             txt += `    ✩  *Enlace* : ${app.link}\n\n`;
         }
 
-        await conn.reply(m.chat, txt, m, rcanal);
+        await conn.sendMessage(m.chat, { image: { url: 'https://qu.ax/TnDHG.jpg' }, caption: txt }, { quoted: m });
         await m.react('✅');
     } catch (error) {
         console.error(error);
@@ -30,9 +30,9 @@ let handler = async (m, { conn, text }) => {
     }
 };
 
-handler.help = ['apksearch <término>'];
+handler.help = ['apkcombosearch <término>'];
 handler.tags = ['search'];
-handler.command = ['apksearch'];
+handler.command = ['apkcombosearch'];
 handler.register = true;
 
 export default handler;
