@@ -23,7 +23,7 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
       txt += `  *» Descripción* : ${search.description}\n`;
     }
 
-    await conn.reply(m.chat, txt, m, rcanal);
+    await conn.sendMessage(m.chat, { image: { url: 'https://qu.ax/KCJsX.jpg' }, caption: txt }, { quoted: m });
     await m.react('✅');
   } catch (error) {
     console.error(error);
