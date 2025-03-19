@@ -1,35 +1,35 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-let handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) return conn.reply(m.chat, '🚩 Ingresa el nombre que deseas buscar en Yahoo.\n\nEjemplo:\n' + `> *${usedPrefix + command}* Chaewon`, m, rcanal);
-  await m.react('🕓');
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) return conn.reply(m.chat, `🍬 Por favor, ingrese el nombre que desea buscar en Yahoo.\n\nEjemplo:\n> *${usedPrefix + command}* Inception`, m, rcanal);
 
-  try {
-    let res = await fetch(`https://delirius-apiofc.vercel.app/search/yahoo?query=${encodeURIComponent(text)}&language=en`);
-    let json = await res.json();
+    await m.react('🕓');
 
-    if (!json.data || json.data.length === 0) {
-      return conn.reply(m.chat, 'No se encontraron resultados para tu búsqueda.', m);
+    try {
+        const response = await axios.get(`https://api.dorratz.com/v2/yahoo-s?query=${encodeURIComponent(text)}&pageCount=5`);
+        const results = response.data;
+
+        if (!results || results.length === 0) {
+            return conn.reply(m.chat, `😞 No se encontraron resultados para "${text}".`, m);
+        }
+
+        let txt = '`乂  Y A H O O  -  B Ú S Q U E\n\n`';
+
+        results.forEach(item => {
+            txt += `➤ *Título:* ${item.title}\n`;
+            txt += `➤ *Descripción:* ${item.description}\n`;
+            txt += `➤ *Enlace:* ${item.link}\n\n`;
+        });
+
+        const image = 'https://qu.ax/KCJsX.jpg'; 
+        await conn.sendMessage(m.chat, { image: { url: image }, caption: txt }, { quoted: m });
+        await m.react('✅');
+    } catch (error) {
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, `😔 Ocurrió un error al intentar obtener la información.`, m);
     }
-
-    let txt = '`乂  Y A H O O  -  B Ú S Q U E`';
-
-    for (let i = 0; i < json.data.length; i++) {
-      let search = json.data[i];
-      txt += `\n\n`;
-      txt += `  *» Nro* : ${i + 1}\n`;
-      txt += `  *» Título* : ${search.title}\n`;
-      txt += `  *» Enlace* : ${search.link}\n`;
-      txt += `  *» Descripción* : ${search.description}\n`;
-    }
-
-    await conn.sendMessage(m.chat, { image: { url: 'https://qu.ax/KCJsX.jpg' }, caption: txt }, { quoted: m });
-    await m.react('✅');
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-  }
-}
+};
 
 handler.help = ['yahoosearch *<búsqueda>*'];
 handler.tags = ['search'];
