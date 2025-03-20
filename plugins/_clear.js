@@ -1,50 +1,124 @@
-import fs from 'fs/promises';
+// Credits: OfcKing
+// >> https://github.com/OfcKing
+
+import fs from 'fs';
 
 const paths = {
   NakanoJadiBot: `./${jadi}/`,
   NakanoSession: `./${sessions}/`
 };
 
-async function cleanDirectory(path, skipFiles) {
-  try {
-    const entries = await fs.readdir(path);
-    for (const entry of entries) {
-      const entryPath = `${path}${entry}`;
-      const stats = await fs.stat(entryPath);
-      if (stats.isDirectory() && entry !== 'creds.json') {
-        const files = await fs.readdir(entryPath);
-        
-        for (const file of files) {
-          if (!skipFiles.includes(file)) {
-            try {
-              await fs.unlink(`${entryPath}/${file}`);
-            } catch (err) {
-            }
-          }
-        }
-      }
-    }
-  } catch (err) {
-  }
-}
-
-async function cleanUp() {
-  const skipFiles = ['creds.json'];
+function cleanSubbotDirectories() {
   for (const [name, path] of Object.entries(paths)) {
-    if (name === 'NakanoSession') continue;
-    await cleanDirectory(path, skipFiles);
+    if (name === 'NakanoSession') continue; // Skip SanSession for this function
+
+    fs.readdir(path, (err, subbotDirs) => {
+      if (err) {
+        return console.log(`No se puede escanear el directorio ${name}: ` + err);
+      }
+
+      let totalFilesDeleted = 0;
+
+      subbotDirs.forEach((subbotDir) => {
+        const subbotPath = `${path}${subbotDir}/`;
+
+        fs.readdir(subbotPath, (err, files) => {
+          if (err) {
+            return console.log(`No se puede escanear el directorio ${subbotPath}: ` + err);
+          }
+
+          let filesDeleted = 0;
+          const deletePromises = files.map((file) => {
+            if (file !== 'creds.json') {
+              return new Promise((resolve, reject) => {
+                fs.unlink(`${subbotPath}${file}`, (err) => {
+                  if (!err || err.code === 'ENOENT') {
+                    filesDeleted++;
+                    totalFilesDeleted++;
+                    resolve();
+                  } else {
+                    reject(err);
+                  }
+                });
+              });
+            }
+          });
+
+          Promise.all(deletePromises).then(() => {
+            if (filesDeleted > 0) {
+              console.log(`Se eliminaron ${filesDeleted} archivos de la sesión Jadibot: ${subbotDir}`);
+            }
+          }).catch((err) => {
+            console.log('Error al eliminar archivos: ' + err);
+          });
+        });
+      });
+
+      if (totalFilesDeleted === 0) {
+        console.log(`0 Archivos eliminados en ${name}`);
+      } else {
+        console.log(`Se eliminaron un total de ${totalFilesDeleted} archivos de todas las sesiones Jadibot en ${name}`);
+      }
+    });
   }
 }
 
-async function cleanNakanoSession() {
+function cleanNakanoSession() {
   const sessionPath = paths.NakanoSession;
-  await cleanDirectory(sessionPath, ['creds.json']);
+
+  fs.readdir(sessionPath, (err, files) => {
+    if (err) {
+      return console.log('No se puede escanear el directorio Sessions: ' + err);
+    }
+
+    let filesDeleted = 0;
+    const deletePromises = files.map((file) => {
+      if (file !== 'creds.json') {
+        return new Promise((resolve, reject) => {
+          fs.unlink(`${sessionPath}${file}`, (err) => {
+            if (!err || err.code === 'ENOENT') {
+              filesDeleted++;
+              resolve();
+            } else {
+              reject(err);
+            }
+          });
+        });
+      }
+    });
+
+    Promise.all(deletePromises).then(() => {
+      if (filesDeleted > 0) {
+        console.log(`Se eliminaron ${filesDeleted} archivos de la sesión.`);
+      } else {
+        console.log('0 Archivos eliminados en Sessions');
+      }
+    }).catch((err) => {
+      console.log('Error al eliminar archivos: ' + err);
+    });
+  });
 }
 
-async function main() {
-  await cleanUp();
-  await cleanNakanoSession();
+function displayNoFilesDeleted() {
+  const noFilesDeletedInSessions = [];
+
+  for (const [name, path] of Object.entries(paths)) {
+    fs.readdir(path, (err, files) => {
+      if (!err && files.length === 1 && files[0] === 'creds.json') {
+        noFilesDeletedInSessions.push(name);
+      }
+
+      if (noFilesDeletedInSessions.length > 0) {
+        console.log(`0 sesiones en: ${noFilesDeletedInSessions.join(', ')}`);
+      }
+    });
+  }
 }
 
-setInterval(main, 60 * 1000);
-main();
+setInterval(cleanSubbotDirectories, 60 * 1000);
+setInterval(cleanNakanoSession, 60 * 1000);
+setInterval(displayNoFilesDeleted, 60 * 1000);
+
+cleanSubbotDirectories();
+cleanNakanoSession();
+displayNoFilesDeleted();
