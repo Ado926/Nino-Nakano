@@ -8,7 +8,7 @@ let handler = async (m, { conn, usedPrefix }) => {
         return conn.reply(m.chat, `${emoji} El usuario no se encuentra en mi base de Datos.`, m, rcanal);
     }
     
-    let img = 'https://qu.ax/fRMNm.jpg';
+    let img = 'https://qu.ax/dAtlg.jpg';
     let user = global.db.data.users[who];
     let name = conn.getName(who);
 
@@ -33,7 +33,7 @@ let handler = async (m, { conn, usedPrefix }) => {
                `┋ 📅 *Fecha:* ${new Date().toLocaleString('id-ID')}\n` +
                `╰━━━━━━━━━━━━⬣`;
 
-    await conn.sendFile(m.chat, img, 'nino.jpg', text, fkontak, rcanal);
+    await conn.sendFile(m.chat, img, 'nino.jpg', text, fkontak);
 }
 
 handler.help = ['inventario', 'inv'];
