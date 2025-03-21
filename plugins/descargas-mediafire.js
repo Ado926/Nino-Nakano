@@ -1,4 +1,3 @@
-
 import { format } from 'util'
 
 async function mediaFire(url) {
@@ -50,7 +49,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   }
   
   try {
-    m.react('💜');
+    m.react('🍭');
     
     const result = await mediaFire(args[0]);
     
@@ -65,9 +64,9 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     let mediaFireInfo = `
 乂  *M E D I A F I R E  -  D O W N L O A D*
 
-	✩ *💜 File Name:* ${result.title || result.filename || 'Unknown'}
-	✩ *🚩 File Size:* ${result.size || 'Unknown'}
-	✩ *🔗 Source:* ${result.link || args[0]}`;
+    ✩ *🍒 File Name:* ${result.title || result.filename || 'Unknown'}
+    ✩ *🚩 File Size:* ${result.size || 'Unknown'}
+    ✩ *🔗 Source:* ${result.link || args[0]}`;
     
     await conn.sendMessage(m.chat, { 
       document: { url: result.url }, 
@@ -75,10 +74,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       fileName: result.filename || result.title || 'mediafire_download.zip',
       caption: mediaFireInfo
     }, { quoted: m });
-    
-    if (result.repair) {
-      m.reply(`*Repair Link (Kalau Download Error):*\n${result.repair}`);
-    }
     
     m.react('✅');
    
