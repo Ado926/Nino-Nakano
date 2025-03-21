@@ -1,88 +1,39 @@
-import fetch from "node-fetch";
-import yts from 'yt-search';
-import axios from "axios";
+import fetch from 'node-fetch';
 
-const formatAudio = ['mp3', 'm4a', 'webm', 'aac', 'flac', 'opus', 'ogg', 'wav'];
-
-const ddownr = {
-  download: async (url, format) => {
-    const config = {
-      method: 'GET',
-      url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
-      }
-    };
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+    if (!args[0]) return conn.reply(m.chat, '[ ✰ ] Ingresa el enlace del vídeo de *YouTube* junto al comando.\n\n`» Ejemplo :`\n' + `> *${usedPrefix + command}* https://youtu.be/QSvaCSt8ixs`, m, rcanal);
+    await m.react('🕓');
 
     try {
-      const response = await axios.request(config);
-      if (response.data && response.data.success) {
-        const { id } = response.data;
-        const downloadUrl = await ddownr.cekProgress(id);
-        return downloadUrl;
-      } else {
-        throw new Error('Fallo al obtener los detalles del video.');
-      }
-    } catch (error) {
-      throw error;
-    }
-  },
+        const response = await fetch(`https://api.ryzendesu.vip/api/downloader/ytmp3?url=${encodeURIComponent(args[0])}`);
+        
+        if (!response.ok) throw new Error("Error en la respuesta de la API");
+        
+        const data = await response.json();
 
-  cekProgress: async (id) => {
-    const config = {
-      method: 'GET',
-      url: `https://p.oceansaver.in/ajax/progress.php?id=${id}`,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
-      }
-    };
+        if (!data.url) throw new Error("No se pudo obtener el enlace de descarga.");
 
-    try {
-      while (true) {
-        const response = await axios.request(config);
-        if (response.data && response.data.success && response.data.progress === 1000) {
-          return response.data.download_url;
-        }
-        await new Promise(resolve => setTimeout(resolve, 5000));
-      }
+        let txt = '`乂  Y O U T U B E  -  M P 3`\n\n' +
+            `    ✩   *Título* : ${data.title}\n` +
+            `    ✩   *Calidad* : ${data.quality}\n` +
+            `    ✩   *Duración* : ${Math.floor(data.lengthSeconds / 60)} minutos\n\n` +
+            '> *- ↻ El audio en documento se está enviando, espera un momento...*';
+
+        await conn.sendFile(m.chat, data.thumbnail, 'thumbnail.jpg', txt, m);
+        
+        await conn.sendMessage(m.chat, { document: { url: data.url }, fileName: `${data.title}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m });
+        
+        await m.react('✅');
     } catch (error) {
-      throw error;
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, 'Ocurrió un error durante la descarga. Inténtalo de nuevo más tarde.', m);
     }
-  }
 };
 
-const handler = async (m, { conn, text, command }) => {
-  try {
-    if (!text.trim()) {
-      return conn.reply(m.chat, `💜 Ingresa el nombre del video a descargar.`, m);
-    }
-
-    const search = await yts(text);
-    if (!search.all || search.all.length === 0) {
-      return m.reply('No se encontraron resultados para tu búsqueda.');
-    }
-
-    const videoInfo = search.all[0];
-    const { title, url } = videoInfo;
-    const format = 'mp3';
-    const downloadUrl = await ddownr.download(url, format);
-
-    if (downloadUrl) {
-      const fileName = `${title.replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/ +/g, '_')}.${format}`;
-      await conn.sendMessage(m.chat, {
-        document: { url: downloadUrl },
-        mimetype: 'audio/mpeg',
-        fileName: fileName
-      }, { quoted: m });
-    } else {
-      return m.reply(`No se pudo descargar el audio.`);
-    }
-  } catch (error) {
-    return m.reply(`Ocurrió un error: ${error.message}`);
-  }
-};
-
-handler.command = handler.help = ['ytmp3doc', 'ytadoc'];
+handler.help = ['ytmp3doc *<link yt>*'];
 handler.tags = ['downloader'];
+handler.command = ['ytmp3doc', 'ytadoc', 'fgmp3doc'];
+handler.register = true;
 
 export default handler;
