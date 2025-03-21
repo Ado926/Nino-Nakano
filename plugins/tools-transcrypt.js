@@ -27,7 +27,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 }
 
 handler.help = ['yttranscript *<link yt>*'];
-handler.tags = ['downloader'];
+handler.tags = ['tools'];
 handler.command = ['yttranscript', 'transcryptyt'];
 handler.register = true;
 
