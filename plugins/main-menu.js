@@ -9,7 +9,6 @@ let tags = {
   'fun': 'Juegos',
   'rpg': 'Rpg',
   'rg': 'Registror',
-  'xp': 'Exp',
   'sticker': 'Stickers',
   'anime': 'Animes',
   'grupo': 'Grupos',
@@ -30,10 +29,10 @@ const defaultMenu = {
   
   *\`乂  I N F O  -  B O T\`*
 
-┌  ◦ *Creador:*  Jose Elber
+┌  ◦ *Creador:*  あ ┊ J᥆sᥱ ᥊rᥣ
 │  ◦ *Modo:* Público
 │  ◦ *Baileys:* Multi Device
-│  ◦ *Tiempo Activa:* %muptime
+│  ◦ *Tiempo Activa:* %uptime
 └  ◦ *Usuarios:* %totalreg
 
   *\`乂  I N F O  -  U S U A R I O\`*
@@ -45,8 +44,8 @@ const defaultMenu = {
    
 *– L I S T A   D E   C O M A N D O S*\n
 `.trimStart(),
-  header: '╭── ◇───────◇───────◇*\n┊ ‹‹ *Category* :: *%category*\n╰───ੈ✩‧₊˚୨୧ ┈┈┈┈┈┈┈┈┈┈┈┈ ୨୧ ༘♡ ⋆｡',
-  body: '│  𑶩͜✿︩︪ᩙ 🪹ൄ ┊ %cmd\n',
+  header: '╭── ◇───────◇───────◇\n┊ ‹‹ *Category* :: *%category*\n╰̷̵̰̰̰̰─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒',
+  body: '┊   ୭ֹ︪❀ׅ፟֟  %cmd\n',
   footer: '╰─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒\n',
   after: `> ${dev}`,
 }
@@ -175,7 +174,7 @@ await conn.sendMessage(m.chat, {
     }
   }
 }, { quoted: fkontak });
-m.react('🍓');
+m.react('🍒');
 
   } catch (e) {
     conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
