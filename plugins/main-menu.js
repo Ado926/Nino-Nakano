@@ -182,9 +182,9 @@ m.react('🍒');
   }
 }
 
-handler.help = ['menu'];
+handler.help = ['menucompleto'];
 handler.tags = ['main'];
-handler.command = /^(menulist|menu|help|menú|\?)$/i;
+handler.command = /^(allmenu|menucompleto|todoelmenu|menuall|\?)$/i;
 handler.register = true;
 
 export default handler;
