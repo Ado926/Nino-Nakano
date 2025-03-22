@@ -1,49 +1,85 @@
-// Codigo Creado por Jose Xrl
-// Free Code Titans 
-// [Wallpapersearch 🌸]
-// https://whatsapp.com/channel/0029ValMlRS6buMFL9d0iQ0S
-
 import axios from 'axios';
+const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await import("@whiskeysockets/baileys")).default;
 
-let handler = async (m, { conn, usedPrefix, command, text }) => {
-  if (!text) 
-    return conn.reply(m.chat, '🚩 Ingresa la palabra clave que deseas buscar.\n\n`Ejemplo:`\n' + `> *${usedPrefix + command}* naruto`, m, rcanal);
-
-  await m.react('🕓');
-
-  try {
-    const response = await axios.get(`https://api.davidcyriltech.my.id/search/wallpaper?text=${text}`);
-
-    if (response.data.success) {
-      const wallpapers = response.data.result;
-      if (wallpapers.length > 0) {
-        for (let i = 0; i < wallpapers.length; i++) {
-          let wallpaper = wallpapers[i];
-          let txt = '`乂  W A L L P A P E R S  -  N A R U T O`\n\n';
-          txt += `    ✩  *Nro* : ${i + 1}\n`;
-          txt += `    ✩  *Título* : ${wallpaper.title || 'Sin título'}\n`;
-          txt += `    ✩  *Tipo* : ${wallpaper.type}\n`;
-          txt += `    ✩  *Fuente* : ${wallpaper.source}\n`;
-          txt += `    ✩  *Imagen* : ${wallpaper.image}\n\n`;
-          txt += `> 📸 Enlace a la imagen: ${wallpaper.image}`;
-
-          await conn.sendMessage(m.chat, { image: { url: wallpaper.image }, caption: txt }, { quoted: m });
-        }
-        
-        await m.react('✅'); 
-      } else {
-        await m.react('✖️');
-        await conn.reply(m.chat, 'No se encontraron resultados para esta búsqueda.', m);
-      }
-    } else {
-      await m.react('✖️');
-      await conn.reply(m.chat, 'Error al obtener resultados.', m);
+let handler = async (message, { conn, text }) => {
+    if (!text) {
+        return conn.reply(message.chat, `🍭 *⍴᥆r 𝖿ᥲ᥎᥆r, іᥒgrᥱsᥲ ᥣ᥆ 𝗊ᥙᥱ ძᥱsᥱᥲs ᑲᥙsᥴᥲr ..*`, message, rcanal);
     }
-  } catch (error) {
-    console.error(error);
-    await m.react('✖️');
-    await conn.reply(m.chat, 'Hubo un error al procesar la solicitud. Intenta de nuevo más tarde.', m);
-  }
+
+    await message.react('🍬');
+    conn.reply(message.chat, `*🌩 Dᥱsᥴᥲrgᥲᥒძ᥆ іmágᥱᥒᥱs, ⍴᥆r 𝖿ᥲ᥎᥆r ᥱs⍴ᥱrᥲ...*`, message, rcanal);
+
+    const apiUrl = `https://delirius-apiofc.vercel.app/search/wallpapers?q=${text}`;
+    
+    try {
+        const response = await axios.get(apiUrl);
+        const images = response.data.data.map(item => item.image);
+
+        let cards = [];
+
+        for (const [index, imageUrl] of images.entries()) {
+            if (index >= 5) break;
+            cards.push({
+                body: proto.Message.InteractiveMessage.Body.fromObject({
+                    text: `Imagen ${index + 1}: ${response.data.data[index].title}`
+                }),
+                footer: proto.Message.InteractiveMessage.Footer.fromObject({
+                    text: '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ ȷ᥆sᥱ ᥊rᥣ'
+                }),
+                header: proto.Message.InteractiveMessage.Header.fromObject({
+                    title: response.data.data[index].title,
+                    hasMediaAttachment: true,
+                    imageMessage: await createImageMessage(imageUrl)
+                }),
+                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+                    buttons: [{
+                        name: "cta_url",
+                        buttonParamsJson: JSON.stringify({
+                            display_text: "Ver Más",
+                            Url: response.data.data[index].thumbnail
+                        })
+                    }]
+                })
+            });
+        }
+
+        const carouselMessage = generateWAMessageFromContent(message.chat, {
+            viewOnceMessage: {
+                message: {
+                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+                        body: proto.Message.InteractiveMessage.Body.fromObject({
+                            text: `📌 rᥱsᥙᥣ𝗍ᥲძ᥆s ძᥱ : ${text}`
+                        }),
+                        footer: proto.Message.InteractiveMessage.Footer.fromObject({
+                            text: 'Gᥲᥣᥱríᥲ іmágᥱᥒᥱs ᥒіᥒ᥆ ᥒᥲkᥲᥒ᥆',
+                        }),
+                        header: proto.Message.InteractiveMessage.Header.fromObject({
+                            hasMediaAttachment: false
+                        }),
+                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+                            cards: cards
+                        })
+                    })
+                }
+            }
+        }, { quoted: message });
+
+        await conn.relayMessage(message.chat, carouselMessage.message, { messageId: carouselMessage.key.id });
+    } catch (error) {
+        console.error(error);
+        conn.reply(message.chat, `Error al buscar imágenes de coches.`, message);
+    }
+};
+
+async function createImageMessage(imageUrl) {
+    const { imageMessage } = await generateWAMessageContent({
+        'image': {
+            'url': imageUrl
+        }
+    }, {
+        'upload': conn.waUploadToServer
+    });
+    return imageMessage;
 }
 
 handler.tags = ['wallpapersearch'];
