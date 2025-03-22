@@ -1,4 +1,46 @@
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
+
+const handler = async (m, { conn, usedPrefix, command }) => {
+    try {
+        let q = m.quoted ? m.quoted : m;
+        let mime = (q.msg || q).mimetype || q.mediaType || "";
+
+        if (!mime) return m.reply(`${emoji} Por favor, responda a una imagen para aumentar el *HD*.`);
+        if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`${emoji2} El formato del archivo (${mime}) no es compatible, envía o responde a una imagen.`);
+
+        conn.reply(m.chat, `${emoji2} Mejorando la calidad de la imagen....`, m, {
+            contextInfo: { externalAdReply: { 
+                mediaUrl: null, 
+                mediaType: 1, 
+                showAdAttribution: true,
+                title: packname,
+                body: wm,
+                previewType: 0, 
+                thumbnail: icons,
+                sourceUrl: channel 
+            }}
+        });
+
+        let img = await q.download?.();
+        let imgMejorada = await Escalar(img);
+
+        if (imgMejorada) {
+            const etiqueta = `🍬 Imagen mejorada para ${m.sender.split('@')[0]} .`;
+            conn.sendMessage(m.chat, { image: imgMejorada, caption: etiqueta }, { quoted: m });
+        } else {
+            return m.reply(`${msm} Ocurrió un error durante el proceso de mejora.`);
+        }
+
+    } catch {
+        return m.reply(`${msm} Ocurrió un error.`);
+    }
+};
+
+handler.help = ["remini", "hd", "enhance"];
+handler.tags = ["tools"];
+handler.register = true;
+handler.command = ["remini", "hd", "enhance"];
+export default handler;
 
 async function Escalar(imagenBuffer) {
     try {
@@ -8,53 +50,13 @@ async function Escalar(imagenBuffer) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                image_data: imagenBuffer.toString("base64"), 
+                image_data: imagenBuffer.toString("base64"),
                 format: "binary",
             }),
-        })
+        });
 
-        return Buffer.from(await response.arrayBuffer())
+        return Buffer.from(await response.arrayBuffer());
     } catch {
-        return null
+        return null;
     }
 }
-
-let manejador = async (m, { conn, usedPrefix, command }) => {
-    conn.mejorador = conn.mejorador || {}
-
-    if (m.sender in conn.mejorador)
-        throw "🍬Hay un proceso en curso. Por favor espera."
-
-    let q = m.quotes ? m.quotes : m
-    let mime = (q.msg || q).mimetype || q.mediaType || ""
-    if (!mime) throw "🍬Envía/Responde con una foto."
-    if (!/image\/(jpe?g|png)/.test(mime)) throw `🍬 El tipo ${mime} no es compatible.`
-
-    conn.mejorador[m.sender] = true
-    await conn.sendMessage(m.chat, { react: { text: "🧃", key: m.key } })
-
-    let img = await q.download?.()
-    let imgMejorada = await Escalar(img)
-
-    if (imgMejorada) {
-        await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } })
-        conn.sendFile(
-            m.chat,
-            imgMejorada,
-            "",
-            "іmᥲgᥱᥒ ᥴ᥆ᥒ᥎ᥱr𝗍іძᥲ ᥲ һძ ᥴ᥆ᥒ é᥊і𝗍᥆ ✅",
-            m
-        )
-    } else {
-        await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } })
-        m.reply("*Resultado:* Fallido ");
-    }
-
-    delete conn.mejorador[m.sender]
-}
-
-manejador.help = ["remini"]
-manejador.tags = ["remini"]
-manejador.command = /^(hd|remini)$/i
-
-export default manejador
