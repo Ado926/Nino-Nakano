@@ -42,7 +42,7 @@ let manejador = async (m, { conn, usedPrefix, command }) => {
             m.chat,
             imgMejorada,
             "",
-            "Hecho ✅",
+            "іmᥲgᥱᥒ ᥴ᥆ᥒ᥎ᥱr𝗍іძᥲ ᥲ һძ ᥴ᥆ᥒ é᥊і𝗍᥆ ✅",
             m
         )
     } else {
