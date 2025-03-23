@@ -3,7 +3,6 @@ import fetch from 'node-fetch';
 
 const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isROwner }) => {
   let chat = global.db.data.chats[m.chat];
-  let user = global.db.data.users[m.sender];
   let bot = global.db.data.settings[conn.user.jid] || {};
   let type = command.toLowerCase();
   let isAll = false, isUser = false;
@@ -114,19 +113,6 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       isEnable = chat.autoresponder = !chat.autoresponder;
       break;
 
-    case 'antisubbots':
-    case 'antisub':
-    case 'antisubot':
-    case 'antibot2':
-      if (m.isGroup) {
-        if (!(isAdmin || isOwner)) {
-          global.dfail('admin', m, conn);
-          throw false;
-        }
-      }
-      isEnable = chat.antiBot2 = !chat.antiBot2;
-      break;
-
     case 'modoadmin':
     case 'soloadmin':
       if (m.isGroup) {
@@ -178,7 +164,7 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       }
       isEnable = chat.reaction = !chat.reaction;
       break;
-      
+
     case 'nsfw':
     case 'nsfwhot':
     case 'nsfwhorny':
@@ -205,8 +191,8 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       isEnable = bot.antiSpam = !bot.antiSpam;
       break;
 
-    case 'antidelete': 
-    case 'antieliminar': 
+    case 'antidelete':
+    case 'antieliminar':
     case 'delete':
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
@@ -215,16 +201,6 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
         }
       }
       isEnable = chat.delete = !chat.delete;
-      break;
-
-    case 'jadibotmd':
-    case 'modejadibot':
-      isAll = true;
-      if (!isOwner) {
-        global.dfail('rowner', m, conn);
-        throw false;
-      }
-      isEnable = bot.jadibotmd = !bot.jadibotmd;
       break;
 
     case 'detect':
@@ -242,7 +218,7 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       isEnable = chat.detect = !chat.detect;
       break;
 
-      case 'detect2':
+    case 'detect2':
     case 'avisos':
     case 'eventos':
       if (!m.isGroup) {
@@ -291,20 +267,9 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       }
       isEnable = chat.antiLink2 = !chat.antiLink2;
       break;
-        
-    case 'antitoxic': 
-    case 'antitoxicos':
-      if (m.isGroup) {
-        if (!(isAdmin || isOwner)) {
-          global.dfail('admin', m, conn);
-          throw false;
-        }
-      }
-      isEnable = chat.antitoxic = !chat.antitoxic;
-      break;
-      
-      case 'antitrabas': 
-      case 'antitraba':
+
+    case 'antitrabas': 
+    case 'antitraba':
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
           global.dfail('admin', m, conn);
@@ -313,9 +278,9 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       }
       isEnable = chat.antiTraba = !chat.antiTraba;
       break;
-      
-      case 'antifake': 
-      case 'antivirtuales':
+
+    case 'antifake': 
+    case 'antivirtuales':
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
           global.dfail('admin', m, conn);
@@ -326,10 +291,11 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       break;
   }
 
-  conn.reply(m.chat, `《✦》La función *${type}* se *${isEnable ? 'activó' : 'desactivó'}* ${isAll ? 'para este Bot' : isUser ? '' : 'para este chat'}`, m);
+  conn.reply(m.chat, `《✦》La función *${type}* se *${isEnable ? 'activó' : 'desactivó'}* ${isAll ? 'para este Bot' : isUser ? '' : 'para este chat'}`, m, rcanal);
 };
 
-handler.help = ['welcome', 'bv', 'bienvenida', 'autoreaction', 'antiprivado', 'antipriv', 'antiprivate', 'restrict', 'restringir', 'autolevelup', 'autonivel', 'autosticker', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'antisubbots', 'antisub', 'antisubot', 'antibot2', 'modoadmin', 'soloadmin', 'autoread', 'autoleer', 'autover', 'antiver', 'antiocultar', 'antiviewonce', 'reaction', 'reaccion', 'emojis', 'nsfw', 'nsfwhot', 'nsfwhorny', 'antispam', 'antiSpam', 'antispamosos', 'antidelete', 'antieliminar', 'delete', 'jadibotmd', 'modejadibot', 'subbots', 'detect', 'configuraciones', 'avisodegp', 'detect2', 'avisos', 'eventos', 'simi', 'autosimi', 'simsimi', 'antilink', 'antilink2', 'antitoxic', 'antitoxicos', 'antitraba', 'antitrabas', 'antifake', 'antivirtuales']
+handler.help = ['welcome', 'bv', 'bienvenida', 'antiprivado', 'antipriv', 'antiprivate', 'restrict', 'restringir', 'autolevelup', 'autonivel', 'autosticker', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'modoadmin', 'soloadmin', 'autoread', 'autoleer', 'autover', 'antiver', 'antiocultar', 'antiviewonce', 'reaction', 'reaccion', 'emojis', 'nsfw', 'nsfwhot', 'nsfwhorny', 'antispam', 'antiSpam', 'antispamosos', 'antidelete', 'antieliminar', 'delete', 'detect', 'configuraciones', 'avisodegp', 'detect2', 'avisos', 'eventos', 'simi', 'autosimi', 'simsimi', 'antilink', 'antilink2', 'antitoxic', 'antitoxicos', 'antitraba', 'antitrabas', 'antifake', 'antivirtuales'];
 handler.tags = ['nable'];
-handler.command = ['welcome', 'bv', 'bienvenida', 'antiprivado', 'autoreaction', 'antipriv', 'antiprivate', 'restrict', 'restringir', 'autolevelup', 'autonivel', 'autosticker', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'antisubbots', 'antisubbots', 'antisub', 'antisubot', 'antibot2', 'modoadmin', 'soloadmin', 'autoread', 'autoleer', 'autover', 'antiver', 'antiocultar', 'antiviewonce', 'reaction', 'reaccion', 'emojis', 'nsfw', 'nsfwhot', 'nsfwhorny', 'antispam', 'antiSpam', 'antispamosos', 'antidelete', 'antieliminar', 'delete', 'jadibotmd', 'modejadibot', 'subbots', 'detect', 'configuraciones', 'avisodegp', 'detect2', 'avisos', 'eventos', 'simi', 'autosimi', 'simsimi', 'antilink', 'antilink2', 'antitoxic', 'antitoxicos', 'antitraba', 'antitrabas', 'antifake', 'antivirtuales']
-export default handler
+handler.command = ['welcome', 'bv', 'bienvenida', 'antiprivado', 'antipriv', 'antiprivate', 'restrict', 'restringir', 'autolevelup', 'autonivel', 'autosticker', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'modoadmin', 'soloadmin', 'autoread', 'autoleer', 'autover', 'antiver', 'antiocultar', 'antiviewonce', 'reaction', 'reaccion', 'emojis', 'nsfw', 'nsfwhot', 'nsfwhorny', 'antispam', 'antiSpam', 'antispamosos', 'antidelete', 'antieliminar', 'delete', 'detect', 'configuraciones', 'avisodegp', 'detect2', 'avisos', 'eventos', 'simi', 'autosimi', 'simsimi', 'antilink', 'antilink2', 'antitoxic', 'antitoxicos', 'antitraba', 'antitrabas', 'antifake', 'antivirtuales'];
+
+export default handler;
