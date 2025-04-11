@@ -33,8 +33,8 @@ const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
                             sections: videos.map((video) => ({
                                 title: video.title,
                                 rows: [
-                                    { header: video.title, title: video.author.name, description: 'Descargar MP3 🎧 (Audio) 🤠', id: `${prefijo}ytmp3 + ${video.url}` },
-                                    { header: video.title, title: video.author.name, description: 'Descargar MP4 📽️ (Video) 👻', id: `${prefijo}ytmp4x + ${video.url}` }
+                                    { header: video.title, title: video.author.name, description: 'Descargar MP3 🎧 (Audio) 🤠', id: `${prefijo}ytmp3 ${video.url}` },
+                                    { header: video.title, title: video.author.name, description: 'Descargar MP4 📽️ (Video) 👻', id: `${prefijo}ytmp4x ${video.url}` }
                                 ]
                             }))
                         })
