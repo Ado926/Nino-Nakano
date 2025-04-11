@@ -1,33 +1,53 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) return conn.reply(m.chat, '[ ✰ ] Ingresa el enlace del vídeo de *YouTube* junto al comando.\n\n`» Ejemplo :`\n' + `> *${usedPrefix + command}* https://youtu.be/QSvaCSt8ixs`, m, rcanal);
+    if (!args[0]) return conn.reply(m.chat, '[ ✰ ] Ingresa el enlace del vídeo de *YouTube* junto al comando.\n\n`» Ejemplo :`\n' + `> *${usedPrefix + command}* https://youtu.be/QSvaCSt8ixs`, m);
+
     await m.react('🕓');
+    let url = encodeURIComponent(args[0]);
+    let apis = [
+        `https://api.ryzendesu.vip/api/downloader/ytmp3?url=${url}`,
+        `https://api.vreden.my.id/api/ytmp3?url=${url}`
+    ];
+
+    let data;
+    for (let api of apis) {
+        try {
+            const response = await fetch(api);
+            if (!response.ok) continue;
+
+            data = await response.json();
+            if (data.url) break;
+        } catch (e) {
+            console.log(`Error con API: ${api}`, e.message);
+        }
+    }
+
+    if (!data || !data.url) {
+        await m.react('✖️');
+        return conn.reply(m.chat, 'Ocurrió un error al intentar descargar el audio. Intenta con otro enlace o más tarde.', m);
+    }
 
     try {
-        const response = await fetch(`https://api.ryzendesu.vip/api/downloader/ytmp3?url=${encodeURIComponent(args[0])}`);
-        
-        if (!response.ok) throw new Error("Error en la respuesta de la API");
-        
-        const data = await response.json();
-
-        if (!data.url) throw new Error("No se pudo obtener el enlace de descarga.");
-
         let txt = '`乂  Y O U T U B E  -  M P 3`\n\n' +
             `    ✩   *Título* : ${data.title}\n` +
-            `    ✩   *Calidad* : ${data.quality}\n` +
-            `    ✩   *Duración* : ${Math.floor(data.lengthSeconds / 60)} minutos\n\n` +
+            `    ✩   *Calidad* : ${data.quality || 'Desconocida'}\n` +
+            `    ✩   *Duración* : ${Math.floor((data.lengthSeconds || 0) / 60)} minutos\n\n` +
             '> *- ↻ El audio se está enviando, espera un momento...*';
 
-        await conn.sendFile(m.chat, data.thumbnail, 'thumbnail.jpg', txt, m);
-        
-        await conn.sendMessage(m.chat, { audio: { url: data.url }, fileName: `${data.title}.mp3`, mimetype: 'audio/mpeg', ptt: true }, { quoted: m });
-        
+        await conn.sendFile(m.chat, data.thumbnail || '', 'thumbnail.jpg', txt, m);
+        await conn.sendMessage(m.chat, {
+            audio: { url: data.url },
+            fileName: `${data.title}.mp3`,
+            mimetype: 'audio/mpeg',
+            ptt: true
+        }, { quoted: m });
+
         await m.react('✅');
     } catch (error) {
         console.error(error);
         await m.react('✖️');
-        conn.reply(m.chat, 'Ocurrió un error durante la descarga. Inténtalo de nuevo más tarde.', m);
+        conn.reply(m.chat, 'Ocurrió un error durante el envío del audio. Inténtalo de nuevo.', m);
     }
 };
 
