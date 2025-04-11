@@ -29,12 +29,12 @@ const handler = async (m, { conn, text, usedPrefix: prefijo }) => {
                     {
                         name: 'single_select',
                         buttonParamsJson: JSON.stringify({
-                            title: 'OPCIONES DE DESCARGA',
+                            title: 'OPCIONES DE DESCARGA!',
                             sections: videos.map((video) => ({
                                 title: video.title,
                                 rows: [
-                                    { header: video.title, title: video.author.name, description: 'Descargar MP3 (Audio)', id: `${prefijo}ytmp3 ${video.url}` },
-                                    { header: video.title, title: video.author.name, description: 'Descargar MP4 (Video)', id: `${prefijo}ytmp4 ${video.url}` },
+                                    { header: video.title, title: video.author.name, description: 'Descargar MP3 (Audio)', id: `${prefijo}ytmp3 + ${video.url}` },
+                                    { header: video.title, title: video.author.name, description: 'Descargar MP4 (Video)', id: `${prefijo}ytmp4 + ${video.url}` },
                                     { header: video.title, title: video.author.name, description: 'Descargar MP3 como Documento', id: `${prefijo}ytmp3doc ${video.url}` },
                                     { header: video.title, title: video.author.name, description: 'Descargar MP4 como Documento', id: `${prefijo}ytmp4doc ${video.url}` }
                                 ]
