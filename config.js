@@ -47,9 +47,9 @@ global.NakanoJadibts = true
 
 global.packname = 'Lᥲ mᥱȷ᥆r ᑲ᥆𝗍 ძᥱ ᥕһᥲ𝗍sᥲ⍴⍴'
 global.botname = '❛  ༉‧₊˚✧☆ 𝙽𝙸𝙽𐔖 𝙱𝙾𝚃 𝙼𝙳'
-global.wm = '© ᥴrᥱᥲძ᥆r ȷ᥆sᥱ ᥊rᥣ.'
+global.wm = '© ᥱძі𝗍ᥱძ ᑲᥡ ᥕіrk.'
 global.author = 'Made By Jose Elber'
-global.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ J᥆sᥱ ᥊rᥣ'
+global.dev = '© ҽժíԵҽժ ᑲᥡ ᥕіrk'
 global.textbot = 'Nino Nakano : Jose XrL'
 global.etiqueta = '@xrljose'
 global.titulowm = 'Whatsapp Multi Device';
