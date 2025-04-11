@@ -21,7 +21,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
         await conn.sendFile(m.chat, data.thumbnail, 'thumbnail.jpg', txt, m);
         
-        await conn.sendMessage(m.chat, { audio: { url: data.url }, fileName: `${data.title}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m });
+        await conn.sendMessage(m.chat, { audio: { url: data.url }, fileName: `${data.title}.mp3`, mimetype: 'audio/mpeg', ptt: true }, { quoted: m });
         
         await m.react('✅');
     } catch (error) {
