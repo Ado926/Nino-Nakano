@@ -1,86 +1,105 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch"
+import yts from 'yt-search'
+import axios from "axios"
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) {
-        return conn.reply(
-            m.chat,
-            '[ ✰ ] Ingresa el enlace del vídeo de *YouTube* junto al comando.\n\n' +
-            '`» Ejemplo :`\n' +
-            `> *${usedPrefix + command}* https://youtu.be/QSvaCSt8ixs`,
-            m
-        );
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+  try {
+    if (!text.trim()) {
+      return conn.reply(m.chat, `❀ Por favor, ingresa el nombre de la música a descargar.`, m)
     }
 
-    await m.react('🕓');
-
-    const apis = [
-        `https://api.ryzendesu.vip/api/downloader/ytmp3?url=${encodeURIComponent(args[0])}`,
-        `https://api.vreden.my.id/api/ytmp3?url=${encodeURIComponent(args[0])}`
-    ];
-
-    let data = null;
-
-    for (let api of apis) {
-        try {
-            const res = await fetch(api);
-            if (!res.ok) continue;
-            const json = await res.json();
-
-            if (json && (json.url || json.result?.url)) {
-                data = {
-                    title: json.title || json.result?.title || 'Sin título',
-                    quality: json.quality || json.result?.quality || 'Desconocida',
-                    lengthSeconds: json.lengthSeconds || json.result?.duration || 0,
-                    thumbnail: json.thumbnail || json.result?.thumbnail || '',
-                    url: json.url || json.result?.url
-                };
-                break;
-            }
-        } catch (e) {
-            console.log(`Error al intentar con API: ${api}\n`, e.message);
-        }
+    const search = await yts(text)
+    if (!search.all || search.all.length === 0) {
+      return m.reply('✧ No se encontraron resultados para tu búsqueda.')
     }
 
-    if (!data) {
-        await m.react('✖️');
-        return conn.reply(m.chat, 'No se pudo obtener el audio. Intenta con otro enlace o más tarde.', m);
+    const videoInfo = search.all[0]
+    if (!videoInfo) {
+      return m.reply('✧ No se pudo obtener información del video.')
     }
 
-    try {
-        let texto = '`乂  Y O U T U B E  -  M P 3`\n\n' +
-            `    ✩   *Título* : ${data.title}\n` +
-            `    ✩   *Calidad* : ${data.quality}\n` +
-            `    ✩   *Duración* : ${Math.floor(data.lengthSeconds / 60)} minutos\n\n` +
-            '> *- ↻ El audio se está enviando, espera un momento...*';
+    const { title, thumbnail, timestamp, views, ago, url, author, seconds } = videoInfo
 
-        if (data.thumbnail) {
-            await conn.sendFile(m.chat, data.thumbnail, 'thumbnail.jpg', texto, m);
-        } else {
-            await conn.sendMessage(m.chat, { text: texto }, { quoted: m });
-        }
-
-        await conn.sendMessage(
-            m.chat,
-            {
-                audio: { url: data.url },
-                fileName: `${data.title}.mp3`,
-                mimetype: 'audio/mpeg',
-                ptt: true
-            },
-            { quoted: m }
-        );
-
-        await m.react('✅');
-    } catch (err) {
-        console.error(err);
-        await m.react('✖️');
-        conn.reply(m.chat, 'Ocurrió un error al enviar el audio.', m);
+    if (!title || !thumbnail || !timestamp || !views || !ago || !url || !author) {
+      return m.reply('✧ Información incompleta del video.')
     }
-};
 
-handler.help = ['ytmp3 *<link yt>*'];
-handler.tags = ['downloader'];
-handler.command = ['ytmp3', 'yta', 'fgmp3'];
-handler.register = true;
+    const infoMessage = '乂  Y O U T U B E  -  M P 3\n\n' +
+      `    ✩   *Título* : ${title}\n` +
+      `    ✩   *Calidad* : 128kbps\n` +
+      `    ✩   *Duración* : ${Math.floor(seconds / 60)} minutos\n\n` +
+      '> *- ↻ El audio se está enviando, espera un momento...*'
 
-export default handler;
+    const thumb = (await conn.getFile(thumbnail))?.data
+
+    const JT = {
+      contextInfo: {
+        externalAdReply: {
+          title: botname,
+          body: dev,
+          mediaType: 1,
+          previewType: 0,
+          mediaUrl: url,
+          sourceUrl: url,
+          thumbnail: thumb,
+          renderLargerThumbnail: true,
+        },
+      },
+    }
+
+    await conn.reply(m.chat, infoMessage, m, JT)
+
+    if (command === 'play' || command === 'yta' || command === 'ytmp3') {
+      try {
+        const api = await (await fetch(`https://api.vreden.my.id/api/ytmp3?url=${url}`)).json()
+        const resulta = api.result
+        const result = resulta.download.url
+
+        if (!result) throw new Error('⚠ El enlace de audio no se generó correctamente.')
+
+        await conn.sendMessage(m.chat, { audio: { url: result }, fileName: `${api.result.title}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m })
+      } catch (e) {
+        return conn.reply(m.chat, '⚠︎ No se pudo enviar el audio. Esto puede deberse a que el archivo es demasiado pesado o a un error en la generación de la URL. Por favor, intenta nuevamente más tarde.', m)
+      }
+    } else if (command === 'play2' || command === 'ytv' || command === 'ytmp4') {
+      try {
+        const response = await fetch(`https://api.vreden.my.id/api/ytmp4?url=${url}`)
+        const json = await response.json()
+        const resultad = json.result
+        const resultado = resultad.download.url
+
+        if (!resultad || !resultado) throw new Error('⚠ El enlace de video no se generó correctamente.')
+
+        await conn.sendMessage(m.chat, { video: { url: resultado }, fileName: resultad.title, mimetype: 'video/mp4', caption: title }, { quoted: m })
+      } catch (e) {
+        return conn.reply(m.chat, '⚠︎ No se pudo enviar el video. Esto puede deberse a que el archivo es demasiado pesado o a un error en la generación de la URL. Por favor, intenta nuevamente más tarde.', m)
+      }
+    } else {
+      return conn.reply(m.chat, '✧︎ Comando no reconocido.', m)
+    }
+
+  } catch (error) {
+    return m.reply(`⚠︎ Ocurrió un error: ${error}`)
+  }
+}
+
+handler.command = handler.help = ['yta', 'ytmp3']
+handler.tags = ['descargas']
+handler.group = true
+
+export default handler
+
+function formatViews(views) {
+  if (views === undefined) {
+    return "No disponible"
+  }
+
+  if (views >= 1_000_000_000) {
+    return `${(views / 1_000_000_000).toFixed(1)}B (${views.toLocaleString()})`
+  } else if (views >= 1_000_000) {
+    return `${(views / 1_000_000).toFixed(1)}M (${views.toLocaleString()})`
+  } else if (views >= 1_000) {
+    return `${(views / 1_000).toFixed(1)}k (${views.toLocaleString()})`
+  }
+  return views.toString()
+}
